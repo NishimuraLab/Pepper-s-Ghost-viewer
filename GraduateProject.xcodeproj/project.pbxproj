@@ -135,7 +135,7 @@
 				TargetAttributes = {
 					D3156D771DBA226B0076D109 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 4BR954ZS5U;
+						DevelopmentTeam = 9GZDTSW432;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -303,7 +303,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4BR954ZS5U;
+				DEVELOPMENT_TEAM = 9GZDTSW432;
 				INFOPLIST_FILE = GraduateProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = grad.red.shalm.GraduateProject;
@@ -316,7 +316,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4BR954ZS5U;
+				DEVELOPMENT_TEAM = 9GZDTSW432;
 				INFOPLIST_FILE = GraduateProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = grad.red.shalm.GraduateProject;

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +24,7 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="height" multiplier="16:9" id="1YM-dW-usy"/>
-                                    <constraint firstAttribute="width" constant="230" id="zJw-d5-oTe"/>
+                                    <constraint firstAttribute="width" constant="275" id="zJw-d5-oTe"/>
                                 </constraints>
                             </view>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jke-p8-7hJ" userLabel="EastView" customClass="AVPlayerView" customModule="GraduateProject" customModuleProvider="target">
@@ -38,20 +39,20 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0S4-GH-j9U" firstAttribute="top" secondItem="nid-p9-8Cz" secondAttribute="bottom" id="4GS-ff-KL3"/>
-                            <constraint firstAttribute="trailing" secondItem="Jke-p8-7hJ" secondAttribute="trailing" id="4OY-ph-CoE"/>
-                            <constraint firstItem="nid-p9-8Cz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BoU-UM-mlT"/>
-                            <constraint firstItem="Jke-p8-7hJ" firstAttribute="height" secondItem="0S4-GH-j9U" secondAttribute="height" id="Dxf-bz-AVe"/>
-                            <constraint firstItem="Jke-p8-7hJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Fe5-sN-dSz"/>
-                            <constraint firstItem="0S4-GH-j9U" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="JEZ-9B-DJe"/>
-                            <constraint firstItem="KQl-JW-W4c" firstAttribute="top" secondItem="0S4-GH-j9U" secondAttribute="bottom" id="JTw-7v-HYu"/>
-                            <constraint firstItem="KQl-JW-W4c" firstAttribute="height" secondItem="nid-p9-8Cz" secondAttribute="height" id="Tm2-hO-bfr"/>
-                            <constraint firstItem="0S4-GH-j9U" firstAttribute="height" secondItem="nid-p9-8Cz" secondAttribute="width" id="WjY-ML-UV7"/>
-                            <constraint firstItem="KQl-JW-W4c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Zop-ye-Z0Q"/>
-                            <constraint firstItem="KQl-JW-W4c" firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="width" id="eJ9-bi-pPX"/>
-                            <constraint firstItem="Jke-p8-7hJ" firstAttribute="width" secondItem="0S4-GH-j9U" secondAttribute="width" id="g6Z-du-hTM"/>
-                            <constraint firstItem="0S4-GH-j9U" firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="height" id="vnE-e7-2wr"/>
-                            <constraint firstItem="0S4-GH-j9U" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xEG-7h-ndC"/>
+                            <constraint firstItem="KQl-JW-W4c" firstAttribute="height" secondItem="nid-p9-8Cz" secondAttribute="height" id="1Jt-Us-v7a"/>
+                            <constraint firstItem="0S4-GH-j9U" firstAttribute="height" secondItem="nid-p9-8Cz" secondAttribute="height" id="1M9-nR-NqN"/>
+                            <constraint firstItem="0S4-GH-j9U" firstAttribute="centerX" secondItem="nid-p9-8Cz" secondAttribute="leading" id="6t3-Qm-NR6"/>
+                            <constraint firstItem="KQl-JW-W4c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7Dl-zu-Nfk"/>
+                            <constraint firstItem="0S4-GH-j9U" firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="width" id="96K-wP-BPi"/>
+                            <constraint firstItem="0S4-GH-j9U" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Aup-aN-luA"/>
+                            <constraint firstItem="Jke-p8-7hJ" firstAttribute="centerX" secondItem="nid-p9-8Cz" secondAttribute="trailing" id="LMR-UG-hAj"/>
+                            <constraint firstItem="Jke-p8-7hJ" firstAttribute="height" secondItem="nid-p9-8Cz" secondAttribute="height" id="QU4-Jw-puv"/>
+                            <constraint firstItem="Jke-p8-7hJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="arL-4x-fYY"/>
+                            <constraint firstItem="nid-p9-8Cz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fAA-Dh-3oC"/>
+                            <constraint firstItem="KQl-JW-W4c" firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="width" id="jll-vv-6vS"/>
+                            <constraint firstItem="Jke-p8-7hJ" firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="width" id="qLh-nB-EfS"/>
+                            <constraint firstItem="0S4-GH-j9U" firstAttribute="top" secondItem="nid-p9-8Cz" secondAttribute="bottom" constant="60" id="uMY-gd-Ujl"/>
+                            <constraint firstItem="KQl-JW-W4c" firstAttribute="top" secondItem="0S4-GH-j9U" secondAttribute="bottom" constant="60" id="zse-9t-bVa"/>
                         </constraints>
                     </view>
                     <connections>
