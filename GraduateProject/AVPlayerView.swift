@@ -13,14 +13,11 @@ class AVPlayerView: UIView{
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        //0 → 0
-        //1 → 90
-        //2 → 180
-        //3 → 270
+        //storybordから呼び出される
+        //tag番号からrotateする
         let rot : Double = Double(self.tag * 90)
         let angle : CGFloat = CGFloat(M_PI * rot / 180)
         self.layer.setAffineTransform(CGAffineTransform(rotationAngle: angle))
-//        self.transform = CGAffineTransform(rotationAngle: angle)
     }
     // AVPlayerのgetterとsetter
     var player: AVQueuePlayer {

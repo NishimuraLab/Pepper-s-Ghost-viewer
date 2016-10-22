@@ -12,6 +12,9 @@
 		D3156D811DBA226C0076D109 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3156D7F1DBA226C0076D109 /* Main.storyboard */; };
 		D3156D831DBA226C0076D109 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3156D821DBA226C0076D109 /* Assets.xcassets */; };
 		D3156D861DBA226C0076D109 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3156D841DBA226C0076D109 /* LaunchScreen.storyboard */; };
+		D33D45A11DBB5A8600E2B669 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33D45A01DBB5A8600E2B669 /* opencv2.framework */; };
+		D33D45A51DBB5B5400E2B669 /* ImageTransform.mm in Sources */ = {isa = PBXBuildFile; fileRef = D33D45A41DBB5B5400E2B669 /* ImageTransform.mm */; };
+		D33D45A71DBB5CC800E2B669 /* AVFoundationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D33D45A61DBB5CC800E2B669 /* AVFoundationUtil.m */; };
 		D34AABF41DBB3EA800162974 /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AABF31DBB3EA800162974 /* AVPlayerView.swift */; };
 		D34AABFB1DBB41C300162974 /* E.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABF71DBB41C300162974 /* E.mov */; };
 		D34AABFC1DBB41C300162974 /* N.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABF81DBB41C300162974 /* N.mov */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8327E60279D626250E32A55F /* Pods-GraduateProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GraduateProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GraduateProject/Pods-GraduateProject.debug.xcconfig"; sourceTree = "<group>"; };
+		B06FB8DF8D92A4F32386C9BC /* Pods_GraduateProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GraduateProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD4E45C96CFDFE19E7DBD50 /* Pods-GraduateProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GraduateProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-GraduateProject/Pods-GraduateProject.release.xcconfig"; sourceTree = "<group>"; };
 		D3156D781DBA226C0076D109 /* GraduateProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraduateProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3156D7B1DBA226C0076D109 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3156D7D1DBA226C0076D109 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -27,6 +33,11 @@
 		D3156D821DBA226C0076D109 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3156D851DBA226C0076D109 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3156D871DBA226C0076D109 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D33D45A01DBB5A8600E2B669 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Pods/OpenCV/opencv2.framework; sourceTree = "<group>"; };
+		D33D45A31DBB5B5400E2B669 /* GraduateProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GraduateProject-Bridging-Header.h"; sourceTree = "<group>"; };
+		D33D45A41DBB5B5400E2B669 /* ImageTransform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageTransform.mm; sourceTree = "<group>"; };
+		D33D45A61DBB5CC800E2B669 /* AVFoundationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVFoundationUtil.m; sourceTree = "<group>"; };
+		D33D45A81DBB5CDA00E2B669 /* AVFoundationUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVFoundationUtil.h; sourceTree = "<group>"; };
 		D34AABF31DBB3EA800162974 /* AVPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
 		D34AABF71DBB41C300162974 /* E.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = E.mov; sourceTree = "<group>"; };
 		D34AABF81DBB41C300162974 /* N.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = N.mov; sourceTree = "<group>"; };
@@ -39,18 +50,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D33D45A11DBB5A8600E2B669 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A4CFE241F4546398D64D8E1D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8327E60279D626250E32A55F /* Pods-GraduateProject.debug.xcconfig */,
+				BFD4E45C96CFDFE19E7DBD50 /* Pods-GraduateProject.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B50DC38F06B0143C4B6A7BB6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D33D45A01DBB5A8600E2B669 /* opencv2.framework */,
+				B06FB8DF8D92A4F32386C9BC /* Pods_GraduateProject.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D3156D6F1DBA226B0076D109 = {
 			isa = PBXGroup;
 			children = (
 				D3156D7A1DBA226C0076D109 /* GraduateProject */,
 				D3156D791DBA226C0076D109 /* Products */,
 				D34AABF61DBB41C300162974 /* movies */,
+				A4CFE241F4546398D64D8E1D /* Pods */,
+				B50DC38F06B0143C4B6A7BB6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +97,7 @@
 		D3156D7A1DBA226C0076D109 /* GraduateProject */ = {
 			isa = PBXGroup;
 			children = (
+				D33D45A21DBB5B2D00E2B669 /* OpenVC */,
 				D34AABF21DBB3E7000162974 /* Controllers */,
 				D34AABF11DBB3E6800162974 /* Views */,
 				D3156D7B1DBA226C0076D109 /* AppDelegate.swift */,
@@ -74,6 +107,17 @@
 				D3156D871DBA226C0076D109 /* Info.plist */,
 			);
 			path = GraduateProject;
+			sourceTree = "<group>";
+		};
+		D33D45A21DBB5B2D00E2B669 /* OpenVC */ = {
+			isa = PBXGroup;
+			children = (
+				D33D45A41DBB5B5400E2B669 /* ImageTransform.mm */,
+				D33D45A31DBB5B5400E2B669 /* GraduateProject-Bridging-Header.h */,
+				D33D45A61DBB5CC800E2B669 /* AVFoundationUtil.m */,
+				D33D45A81DBB5CDA00E2B669 /* AVFoundationUtil.h */,
+			);
+			name = OpenVC;
 			sourceTree = "<group>";
 		};
 		D34AABF11DBB3E6800162974 /* Views */ = {
@@ -110,9 +154,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3156D8A1DBA226C0076D109 /* Build configuration list for PBXNativeTarget "GraduateProject" */;
 			buildPhases = (
+				B7F995F714A2D5509A297611 /* [CP] Check Pods Manifest.lock */,
 				D3156D741DBA226B0076D109 /* Sources */,
 				D3156D751DBA226B0076D109 /* Frameworks */,
 				D3156D761DBA226B0076D109 /* Resources */,
+				7C49F5565F3BA2E5CF01076C /* [CP] Embed Pods Frameworks */,
+				D23E6BECA4E069E85B71C0A0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -136,6 +183,7 @@
 					D3156D771DBA226B0076D109 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 9GZDTSW432;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -175,6 +223,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7C49F5565F3BA2E5CF01076C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GraduateProject/Pods-GraduateProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B7F995F714A2D5509A297611 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D23E6BECA4E069E85B71C0A0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GraduateProject/Pods-GraduateProject-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D3156D741DBA226B0076D109 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -182,6 +278,8 @@
 			files = (
 				D34AABF41DBB3EA800162974 /* AVPlayerView.swift in Sources */,
 				D3156D7E1DBA226C0076D109 /* ViewController.swift in Sources */,
+				D33D45A51DBB5B5400E2B669 /* ImageTransform.mm in Sources */,
+				D33D45A71DBB5CC800E2B669 /* AVFoundationUtil.m in Sources */,
 				D3156D7C1DBA226C0076D109 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,26 +399,43 @@
 		};
 		D3156D8B1DBA226C0076D109 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8327E60279D626250E32A55F /* Pods-GraduateProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 9GZDTSW432;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/OpenCV",
+				);
 				INFOPLIST_FILE = GraduateProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = grad.red.shalm.GraduateProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GraduateProject/GraduateProject-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		D3156D8C1DBA226C0076D109 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFD4E45C96CFDFE19E7DBD50 /* Pods-GraduateProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 9GZDTSW432;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/OpenCV",
+				);
 				INFOPLIST_FILE = GraduateProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = grad.red.shalm.GraduateProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GraduateProject/GraduateProject-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
