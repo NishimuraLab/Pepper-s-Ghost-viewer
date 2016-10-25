@@ -62,6 +62,7 @@ class ViewController: UIViewController {
         generator.requestedTimeToleranceBefore = kCMTimeZero
         let fps = 20
         let end = Int(CMTimeGetSeconds(asset.duration)) * fps
+        var images : [UIImage] = []
         
         //切り出した画像の数岳ループし、フィルターをかけてファイルを作成
         (0 ..< end).forEach { (i) in
@@ -70,6 +71,7 @@ class ViewController: UIViewController {
                 let image : CGImage = try generator.copyCGImage(at: time, actualTime: &time)
                 let genImage : UIImage = UIImage(cgImage: image)
                 let filteredImg = ImageTransform.maskedImage(genImage)
+                images.append(filteredImg!)
                 let data = UIImageJPEGRepresentation(filteredImg!, 0.6)
                 let fileName = String.init(format: "/Users/reastral/Desktop/GraduateProject/images/%i.jpg", i)
                 let jpgUrl = URL(fileURLWithPath: fileName)
@@ -84,7 +86,99 @@ class ViewController: UIViewController {
                 self.progressBar.progress = progress
             }
         }
+        //動画作成
+        imagesToMovie(images: images)
         
+    }
+    
+    func imagesToMovie(images : [UIImage]){
+        let size = [640,460]
+        let path = "/Users/reastral/Desktop/GraduateProject/products/gray.mov"
+        let url = URL(fileURLWithPath: path)
+        do{
+            let videoWriter = try AVAssetWriter(url: url, fileType: AVFileTypeQuickTimeMovie)
+            let options = [
+                AVVideoCodecKey  : AVVideoCodecH264,
+                AVVideoWidthKey  : size[0],
+                AVVideoHeightKey : size[1]
+            ] as [String : Any]
+            let input = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: options)
+            videoWriter.add(input)
+            
+            let pbAttr = [
+                kCVPixelBufferPixelFormatTypeKey as String : kCVPixelFormatType_32ARGB,
+                kCVPixelBufferWidthKey as String : size[0],
+                kCVPixelBufferHeightKey as String : size[1]
+            ] as [String : Any]
+            
+            let adapter = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: input, sourcePixelBufferAttributes: pbAttr)
+            
+            input.expectsMediaDataInRealTime = true
+            
+            videoWriter.startWriting()
+//            if !videoWriter.startWriting(){
+//                print("動画作成初期化失敗")
+//                return
+//            }
+            
+            videoWriter.startSession(atSourceTime: kCMTimeZero)
+            
+            var buf : CVPixelBuffer? = nil
+            var framecount = 0
+            let duration = 1
+            let fps = 20
+            images.forEach({ (image) in
+                if adapter.assetWriterInput.isReadyForMoreMediaData {
+                    let val = framecount * fps + duration
+                    let frameTime = CMTimeMake(Int64(val), Int32(fps))
+                    buf = pixelBufferFromCGImage(image: image.cgImage!)
+                    
+                    adapter.append(buf!, withPresentationTime: frameTime)
+//                    if !adapter.append(buf!, withPresentationTime: frameTime){
+//                        print("fail to append")
+//                    }
+                    framecount += 1
+                }
+            })
+            
+            input.markAsFinished()
+            videoWriter.finishWriting {
+                print("作成終了")
+            }
+        }catch{
+            print("処理中にエラー")
+        }
+        
+    }
+    
+    func pixelBufferFromCGImage(image : CGImage) ->CVPixelBuffer{
+        let options = [
+            kCVPixelBufferCGImageCompatibilityKey as String : true,
+            kCVPixelBufferCGBitmapContextCompatibilityKey as String : true
+            ] as [String : Any]
+        
+        var pxBuffer : CVPixelBuffer? = nil
+        CVPixelBufferCreate(kCFAllocatorDefault, image.width, image.height, kCVPixelFormatType_32ARGB, options as CFDictionary?, &pxBuffer )
+        CVPixelBufferLockBaseAddress(pxBuffer!, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
+        
+        let pxData : UnsafeMutableRawPointer = CVPixelBufferGetBaseAddress( pxBuffer! )!
+        
+        let rgbColorSpace : CGColorSpace = image.colorSpace!
+        
+        let row = 4 * image.width
+        let context = CGContext.init(data: pxData, width: image.width, height: image.height, bitsPerComponent: 8, bytesPerRow: row, space: rgbColorSpace, bitmapInfo: UInt32(0))!
+        
+        
+        context.concatenate(CGAffineTransform(rotationAngle: 0))
+        let flipVirtical = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: CGFloat(image.height))
+        context.concatenate(flipVirtical)
+        let flipHorizontal = CGAffineTransform(a: -1.0, b: 0.0, c: 0.0, d: 1.0, tx: CGFloat(image.width), ty: 0.0)
+        context.concatenate(flipHorizontal)
+        context.draw(image, in: CGRect(x: 0, y: 0, width: image.width, height: image.height))
+
+        CVPixelBufferUnlockBaseAddress(pxBuffer!, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
+        
+        return pxBuffer!
     }
     
     override func didReceiveMemoryWarning() {
