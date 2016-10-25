@@ -97,7 +97,7 @@
 		D3156D7A1DBA226C0076D109 /* GraduateProject */ = {
 			isa = PBXGroup;
 			children = (
-				D33D45A21DBB5B2D00E2B669 /* OpenVC */,
+				D35F6F0B1DBF07B100D42ACE /* Model */,
 				D34AABF21DBB3E7000162974 /* Controllers */,
 				D34AABF11DBB3E6800162974 /* Views */,
 				D3156D7B1DBA226C0076D109 /* AppDelegate.swift */,
@@ -145,6 +145,14 @@
 				D34AABFA1DBB41C300162974 /* W.mov */,
 			);
 			path = movies;
+			sourceTree = "<group>";
+		};
+		D35F6F0B1DBF07B100D42ACE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D33D45A21DBB5B2D00E2B669 /* OpenVC */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

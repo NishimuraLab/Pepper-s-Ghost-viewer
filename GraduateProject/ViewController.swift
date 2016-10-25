@@ -17,51 +17,76 @@ class ViewController: UIViewController {
     @IBOutlet weak var sView: AVPlayerView!
     
     var playerItem : AVPlayerItem!
-    var assets : AVURLAsset!
+    var asset : AVURLAsset!
     var player : AVQueuePlayer!
     var looper : AVPlayerLooper!
     
+    @IBOutlet weak var initialView: UIView!
+    @IBOutlet weak var progressBar: UIProgressView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        movie2Images()
-        //KVO登録
-//        playerItem.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
-//        player = AVQueuePlayer(playerItem: playerItem)
-//        //ルーパーを作成して、動画をループする(iOS10からの機能)
-//        looper = AVPlayerLooper(player: player, templateItem: playerItem)
-    }
+        
 
-    func movie2Images(){
-        //ローカルから動画を読み出し
+        //動画ソース選択して、AVAssetに
         let URLString = Bundle.main.path(forResource: "N", ofType: "mov")
         let url = URL.init(fileURLWithPath: URLString!)
-        assets = AVURLAsset.init(url: url)
-        let generator = AVAssetImageGenerator(asset: assets)
+        asset = AVURLAsset.init(url: url)
+        //動画を切り出して、フィルターをかける
+        DispatchQueue.global(qos: .default).async {
+            self.movie2FilteredImages(asset: self.asset)
+            DispatchQueue.main.async {
+                self.fadeOutView(view: self.initialView)
+            }
+        }
+
+        playerItem = AVPlayerItem.init(asset: asset)
+        //KVO登録
+        playerItem.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
+        player = AVQueuePlayer(playerItem: playerItem)
+        //ルーパーを作成して、動画をループする(iOS10からの機能)
+        looper = AVPlayerLooper(player: player, templateItem: playerItem)
+    }
+
+    func fadeOutView(view : UIView){
+        UIView.beginAnimations("fadeOut", context: nil)
+        UIView.setAnimationCurve(.easeOut)
+        UIView.setAnimationDuration(0.3)
+        view.alpha = 0
+        UIView.commitAnimations()
+    }
+    func movie2FilteredImages(asset : AVURLAsset){
+        //ローカルから動画を読み出し
+        let generator = AVAssetImageGenerator(asset: asset)
         generator.requestedTimeToleranceAfter = kCMTimeZero
         generator.requestedTimeToleranceBefore = kCMTimeZero
         let fps = 20
-        let end = Int(CMTimeGetSeconds(assets.duration)) * fps
+        let end = Int(CMTimeGetSeconds(asset.duration)) * fps
         
+        //切り出した画像の数岳ループし、フィルターをかけてファイルを作成
         (0 ..< end).forEach { (i) in
             var time = CMTimeMake(Int64(i), Int32(fps))
             do{
                 let image : CGImage = try generator.copyCGImage(at: time, actualTime: &time)
                 let genImage : UIImage = UIImage(cgImage: image)
-                let data = UIImageJPEGRepresentation(genImage, 0.6)
+                let filteredImg = ImageTransform.maskedImage(genImage)
+                let data = UIImageJPEGRepresentation(filteredImg!, 0.6)
                 let fileName = String.init(format: "/Users/reastral/Desktop/GraduateProject/images/%i.jpg", i)
                 let jpgUrl = URL(fileURLWithPath: fileName)
                 try data?.write(to: jpgUrl)
-                print("書き込みkannryou")
+                print("書き込み完了")
             }catch{
                 print("Errors has detected!")
             }
+            DispatchQueue.main.async {
+                //Progress更新
+                let progress  = Float(i) / Float(end)
+                self.progressBar.progress = progress
+            }
         }
-
         
-
-        
-        playerItem = AVPlayerItem.init(asset: assets)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

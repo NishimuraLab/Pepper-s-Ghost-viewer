@@ -36,8 +36,44 @@
                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQl-JW-W4c" userLabel="SouthView" customClass="AVPlayerView" customModule="GraduateProject" customModuleProvider="target">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MrB-uy-wJ5" userLabel="CenterPosition">
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="aIJ-Gd-KAq"/>
+                                    <constraint firstAttribute="width" secondItem="MrB-uy-wJ5" secondAttribute="height" multiplier="1:1" id="aX5-aP-Vj1"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocT-hB-7rM" userLabel="InitialBack">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="動画を切り出しています..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2f2-vn-fn5">
+                                        <fontDescription key="fontDescription" name="MalayalamSangamMN" family="Malayalam Sangam MN" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="fsb-kL-Wrk">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="fsb-kL-Wrk" secondAttribute="height" multiplier="1:1" id="d7Y-h7-mvu"/>
+                                            <constraint firstAttribute="width" constant="30" id="zda-n2-VtW"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Qc-yr-Jid">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="302" id="6hF-np-ysW"/>
+                                        </constraints>
+                                    </progressView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="2f2-vn-fn5" firstAttribute="top" secondItem="fsb-kL-Wrk" secondAttribute="bottom" constant="30" id="6yO-gh-Q5x"/>
+                                    <constraint firstItem="5Qc-yr-Jid" firstAttribute="centerX" secondItem="ocT-hB-7rM" secondAttribute="centerX" id="7l6-ne-nuY"/>
+                                    <constraint firstItem="2f2-vn-fn5" firstAttribute="centerX" secondItem="ocT-hB-7rM" secondAttribute="centerX" id="IqJ-d6-cOr"/>
+                                    <constraint firstItem="fsb-kL-Wrk" firstAttribute="centerX" secondItem="ocT-hB-7rM" secondAttribute="centerX" id="Puo-Fy-ggz"/>
+                                    <constraint firstAttribute="bottom" secondItem="2f2-vn-fn5" secondAttribute="bottom" constant="112" id="rap-ua-ewx"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Qc-yr-Jid" secondAttribute="bottom" constant="50" id="zxw-ax-v2Z"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KQl-JW-W4c" firstAttribute="height" secondItem="nid-p9-8Cz" secondAttribute="height" id="1Jt-Us-v7a"/>
                             <constraint firstItem="0S4-GH-j9U" firstAttribute="height" secondItem="nid-p9-8Cz" secondAttribute="height" id="1M9-nR-NqN"/>
@@ -45,10 +81,16 @@
                             <constraint firstItem="KQl-JW-W4c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7Dl-zu-Nfk"/>
                             <constraint firstItem="0S4-GH-j9U" firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="width" id="96K-wP-BPi"/>
                             <constraint firstItem="0S4-GH-j9U" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Aup-aN-luA"/>
+                            <constraint firstAttribute="trailing" secondItem="ocT-hB-7rM" secondAttribute="trailing" id="Eee-Ez-D4l"/>
                             <constraint firstItem="Jke-p8-7hJ" firstAttribute="centerX" secondItem="nid-p9-8Cz" secondAttribute="trailing" id="LMR-UG-hAj"/>
                             <constraint firstItem="Jke-p8-7hJ" firstAttribute="height" secondItem="nid-p9-8Cz" secondAttribute="height" id="QU4-Jw-puv"/>
+                            <constraint firstItem="MrB-uy-wJ5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sk7-fZ-FPr"/>
+                            <constraint firstItem="ocT-hB-7rM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="VfM-XV-Vqw"/>
+                            <constraint firstItem="MrB-uy-wJ5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aOT-rK-LGi"/>
                             <constraint firstItem="Jke-p8-7hJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="arL-4x-fYY"/>
                             <constraint firstItem="nid-p9-8Cz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fAA-Dh-3oC"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ocT-hB-7rM" secondAttribute="bottom" id="hFI-7q-oMz"/>
+                            <constraint firstItem="ocT-hB-7rM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jZS-4x-YfC"/>
                             <constraint firstItem="KQl-JW-W4c" firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="width" id="jll-vv-6vS"/>
                             <constraint firstItem="Jke-p8-7hJ" firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="width" id="qLh-nB-EfS"/>
                             <constraint firstItem="0S4-GH-j9U" firstAttribute="top" secondItem="nid-p9-8Cz" secondAttribute="bottom" constant="60" id="uMY-gd-Ujl"/>
@@ -57,13 +99,16 @@
                     </view>
                     <connections>
                         <outlet property="eView" destination="Jke-p8-7hJ" id="0Nj-kB-L5Y"/>
+                        <outlet property="initialView" destination="ocT-hB-7rM" id="gKT-0k-66M"/>
                         <outlet property="nView" destination="nid-p9-8Cz" id="VJn-Pm-j5n"/>
+                        <outlet property="progressBar" destination="5Qc-yr-Jid" id="083-3R-aZx"/>
                         <outlet property="sView" destination="KQl-JW-W4c" id="Ouy-hY-dRw"/>
                         <outlet property="wView" destination="0S4-GH-j9U" id="EM9-SQ-dKa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
         </scene>
     </scenes>
 </document>
