@@ -126,18 +126,21 @@ class ViewController: UIViewController {
             videoWriter.startWriting()
             videoWriter.startSession(atSourceTime: kCMTimeZero)
             
-            var buf : CVPixelBuffer? = nil
+            var buf : CVPixelBuffer?
             var framecount = 0
             let duration = 1
-            let fps = 20
+            let fps = 24
+            var count = 0
             images.forEach({ (image) in
                 if adapter.assetWriterInput.isReadyForMoreMediaData {
-                    let val = framecount * fps + duration
-                    let frameTime = CMTimeMake(Int64(val), Int32(fps))
-                    buf = pixelBufferFromCGImage(image: image.cgImage!)
+                    let val = Int64(framecount * fps + duration)
+                    let frameTime = CMTimeMake(val, Int32(fps))
+                    buf = AVFoundationUtil.pixelBuffer(from: image.cgImage).takeRetainedValue()
                     
                     adapter.append(buf!, withPresentationTime: frameTime)
                     framecount += 1
+                    print(count)
+                    count += 1
                 }
             })
             
@@ -149,36 +152,6 @@ class ViewController: UIViewController {
             print("処理中にエラー")
         }
         
-    }
-    
-    func pixelBufferFromCGImage(image : CGImage) ->CVPixelBuffer{
-        let options = [
-            kCVPixelBufferCGImageCompatibilityKey as String : true,
-            kCVPixelBufferCGBitmapContextCompatibilityKey as String : true
-            ] as [String : Any]
-        
-        var pxBuffer : CVPixelBuffer? = nil
-        CVPixelBufferCreate(kCFAllocatorDefault, image.width, image.height, kCVPixelFormatType_32ARGB, options as CFDictionary?, &pxBuffer )
-        CVPixelBufferLockBaseAddress(pxBuffer!, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
-        
-        let pxData : UnsafeMutableRawPointer = CVPixelBufferGetBaseAddress( pxBuffer! )!
-        
-        let rgbColorSpace : CGColorSpace = image.colorSpace!
-        
-        let row = 4 * image.width
-        let context = CGContext.init(data: pxData, width: image.width, height: image.height, bitsPerComponent: 8, bytesPerRow: row, space: rgbColorSpace, bitmapInfo: UInt32(0))!
-        
-        
-        context.concatenate(CGAffineTransform(rotationAngle: 0))
-        let flipVirtical = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: CGFloat(image.height))
-        context.concatenate(flipVirtical)
-        let flipHorizontal = CGAffineTransform(a: -1.0, b: 0.0, c: 0.0, d: 1.0, tx: CGFloat(image.width), ty: 0.0)
-        context.concatenate(flipHorizontal)
-        context.draw(image, in: CGRect(x: 0, y: 0, width: image.width, height: image.height))
-
-        CVPixelBufferUnlockBaseAddress(pxBuffer!, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
-        
-        return pxBuffer!
     }
     
     override func didReceiveMemoryWarning() {
