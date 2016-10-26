@@ -21,13 +21,15 @@ class ViewController: UIViewController {
     var player : AVQueuePlayer!
     var looper : AVPlayerLooper!
     
+    let imagesPath = "/Users/reastral/Desktop/GraduateProject/images/"
+    let productsPath = "/Users/reastral/Desktop/GraduateProject/products/"
+    let filterdMovieName = "gray.mov"
+    
     @IBOutlet weak var initialView: UIView!
     @IBOutlet weak var progressBar: UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         //動画ソース選択して、AVAssetに
         let URLString = Bundle.main.path(forResource: "N", ofType: "mov")
         let url = URL.init(fileURLWithPath: URLString!)
@@ -55,6 +57,8 @@ class ViewController: UIViewController {
         view.alpha = 0
         UIView.commitAnimations()
     }
+    
+    //動画をFPSごとに画像に変換し、フィルターをかけるメソッド
     func movie2FilteredImages(asset : AVURLAsset){
         //ローカルから動画を読み出し
         let generator = AVAssetImageGenerator(asset: asset)
@@ -70,10 +74,11 @@ class ViewController: UIViewController {
             do{
                 let image : CGImage = try generator.copyCGImage(at: time, actualTime: &time)
                 let genImage : UIImage = UIImage(cgImage: image)
+                //OpenCVにてフィルター処理
                 let filteredImg = ImageTransform.maskedImage(genImage)
                 images.append(filteredImg!)
                 let data = UIImageJPEGRepresentation(filteredImg!, 0.6)
-                let fileName = String.init(format: "/Users/reastral/Desktop/GraduateProject/images/%i.jpg", i)
+                let fileName = String.init(format: imagesPath + "%i.jpg", i)
                 let jpgUrl = URL(fileURLWithPath: fileName)
                 try data?.write(to: jpgUrl)
                 print("書き込み完了")
@@ -91,10 +96,13 @@ class ViewController: UIViewController {
         
     }
     
+    //複数の画像から動画を作成するメソッド
     func imagesToMovie(images : [UIImage]){
-        let size = [640,460]
-        let path = "/Users/reastral/Desktop/GraduateProject/products/gray.mov"
+        
+        let size = [640,360]
+        let path = productsPath + filterdMovieName
         let url = URL(fileURLWithPath: path)
+        AppUtil.removeFilesWhenInit(path: path)
         do{
             let videoWriter = try AVAssetWriter(url: url, fileType: AVFileTypeQuickTimeMovie)
             let options = [
@@ -116,11 +124,6 @@ class ViewController: UIViewController {
             input.expectsMediaDataInRealTime = true
             
             videoWriter.startWriting()
-//            if !videoWriter.startWriting(){
-//                print("動画作成初期化失敗")
-//                return
-//            }
-            
             videoWriter.startSession(atSourceTime: kCMTimeZero)
             
             var buf : CVPixelBuffer? = nil
@@ -134,9 +137,6 @@ class ViewController: UIViewController {
                     buf = pixelBufferFromCGImage(image: image.cgImage!)
                     
                     adapter.append(buf!, withPresentationTime: frameTime)
-//                    if !adapter.append(buf!, withPresentationTime: frameTime){
-//                        print("fail to append")
-//                    }
                     framecount += 1
                 }
             })

@@ -20,6 +20,7 @@
 		D34AABFC1DBB41C300162974 /* N.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABF81DBB41C300162974 /* N.mov */; };
 		D34AABFD1DBB41C300162974 /* S.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABF91DBB41C300162974 /* S.mov */; };
 		D34AABFE1DBB41C300162974 /* W.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABFA1DBB41C300162974 /* W.mov */; };
+		D35F6F141DC0C22B00D42ACE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F6F131DC0C22B00D42ACE /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		D34AABF81DBB41C300162974 /* N.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = N.mov; sourceTree = "<group>"; };
 		D34AABF91DBB41C300162974 /* S.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = S.mov; sourceTree = "<group>"; };
 		D34AABFA1DBB41C300162974 /* W.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = W.mov; sourceTree = "<group>"; };
+		D35F6F131DC0C22B00D42ACE /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = ../Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				D34AABF21DBB3E7000162974 /* Controllers */,
 				D34AABF11DBB3E6800162974 /* Views */,
 				D3156D7B1DBA226C0076D109 /* AppDelegate.swift */,
+				D35F6F131DC0C22B00D42ACE /* Util.swift */,
 				D3156D7F1DBA226C0076D109 /* Main.storyboard */,
 				D3156D821DBA226C0076D109 /* Assets.xcassets */,
 				D3156D841DBA226C0076D109 /* LaunchScreen.storyboard */,
@@ -285,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D34AABF41DBB3EA800162974 /* AVPlayerView.swift in Sources */,
+				D35F6F141DC0C22B00D42ACE /* Util.swift in Sources */,
 				D3156D7E1DBA226C0076D109 /* ViewController.swift in Sources */,
 				D33D45A51DBB5B5400E2B669 /* ImageTransform.mm in Sources */,
 				D33D45A71DBB5CC800E2B669 /* AVFoundationUtil.m in Sources */,
