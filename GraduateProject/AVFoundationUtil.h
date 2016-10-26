@@ -31,4 +31,6 @@
  */
 + (AVCaptureVideoOrientation)videoOrientationFromDeviceOrientation:(UIDeviceOrientation)deviceOrientation;
 
++ (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image;
+
 @end

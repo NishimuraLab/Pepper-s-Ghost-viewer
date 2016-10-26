@@ -75,4 +75,43 @@
     return orientation;
 }
 
++ (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image
+{
+    NSDictionary *options = @{ (NSString *)kCVPixelBufferCGImageCompatibilityKey: @YES,
+                               (NSString *)kCVPixelBufferCGBitmapContextCompatibilityKey: @YES, };
+    
+    CVPixelBufferRef pxbuffer = NULL;
+    
+    CGFloat width  = CGImageGetWidth(image);
+    CGFloat height = CGImageGetHeight(image);
+    CVPixelBufferCreate(kCFAllocatorDefault,
+                        width,
+                        height,
+                        kCVPixelFormatType_32ARGB,
+                        (__bridge CFDictionaryRef)options,
+                        &pxbuffer);
+    
+    CVPixelBufferLockBaseAddress(pxbuffer, 0);
+    void *pxdata = CVPixelBufferGetBaseAddress(pxbuffer);
+    
+    size_t bitsPerComponent       = 8;
+    size_t bytesPerRow            = 4 * width;
+    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(pxdata,
+                                                 width,
+                                                 height,
+                                                 bitsPerComponent,
+                                                 bytesPerRow,
+                                                 rgbColorSpace,
+                                                 (CGBitmapInfo)kCGImageAlphaNoneSkipFirst);
+    
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), image);
+    CGColorSpaceRelease(rgbColorSpace);
+    CGContextRelease(context);
+    
+    CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
+    
+    return pxbuffer;
+}
+
 @end
