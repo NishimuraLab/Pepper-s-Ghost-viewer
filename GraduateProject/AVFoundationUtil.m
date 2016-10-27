@@ -74,6 +74,7 @@
     }
     return orientation;
 }
+//Quoted from http://qiita.com/edo_m18/items/16480f831fd76ab88b6e
 
 + (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image
 {
@@ -112,6 +113,106 @@
     CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
     
     return pxbuffer;
+}
+
++ (void)makeVideoFromCGImages:(NSURL*)url : (NSArray<UIImage*>*)images{
+    NSInteger width = 640;
+    NSInteger height = 360;
+    
+    // パスは適切な保存先を指定
+    AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:url fileType:AVFileTypeQuickTimeMovie error:nil];
+    // アウトプットの設定
+    NSDictionary *outputSettings =
+  @{
+    AVVideoCodecKey : AVVideoCodecH264,
+    AVVideoWidthKey : @(width),
+    AVVideoHeightKey: @(height),
+    };
+    
+    // writer inputを生成
+    AVAssetWriterInput *writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:outputSettings];
+    
+    // writerに、writer inputを設定
+    [videoWriter addInput:writerInput];
+    
+    // source pixel buffer attributesを設定
+    NSDictionary *sourcePixelBufferAttributes =
+  @{
+    (NSString *)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_32ARGB),
+    (NSString *)kCVPixelBufferWidthKey: @(width),
+    (NSString *)kCVPixelBufferHeightKey: @(height),
+    };
+    
+    // writer input pixel buffer adaptorを生成
+    AVAssetWriterInputPixelBufferAdaptor *adaptor = [AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput sourcePixelBufferAttributes:sourcePixelBufferAttributes];
+
+    //
+    writerInput.expectsMediaDataInRealTime = YES;
+    
+    // 生成開始できるか確認
+    if (![videoWriter startWriting]) {
+        // Error!
+    }
+    
+    // 動画生成開始
+    [videoWriter startSessionAtSourceTime:kCMTimeZero];
+
+    
+    // pixel bufferを宣言
+    CVPixelBufferRef buffer = NULL;
+    
+    // 現在のフレームカウント
+    int i = 1;
+    
+    // 各画像の表示する時間
+    int durationForEachImage = 1;
+    
+    // FPS
+    int32_t fps = 24;
+    
+    // 全画像をバッファに貯めこむ
+    // Quoted by http://iphonedevsdk.com/forum/iphone-sdk-development/77999-make-a-video-from-nsarray-of-uiimages.html
+    
+    while(1) {
+        @autoreleasepool {
+            if (writerInput.readyForMoreMediaData) {
+                
+                CMTime frameTime = CMTimeMake(1, 20);
+                CMTime lastTime=CMTimeMake(i, 20);
+                CMTime presentTime=CMTimeAdd(lastTime, frameTime);
+                
+                // 動画の時間を生成（その画像の表示する時間。開始時点と表示時間を渡す）
+                
+                // CGImageからバッファを生成
+                if(i >= images.count){
+                    buffer = NULL;
+                }else{
+                    UIImage *image = images[i];
+                    buffer = [self pixelBufferFromCGImage: image.CGImage];
+                }
+                
+                if(buffer){
+                    NSLog(@"%d",i);
+                    [adaptor appendPixelBuffer:buffer withPresentationTime:presentTime];
+                    i++;
+                }else{
+                    // 動画生成終了
+                    [writerInput markAsFinished];
+//                    [videoWriter endSessionAtSourceTime:CMTimeMake((int64_t)(frameCount - 1) * fps * durationForEachImage, fps)];
+                    
+                    [videoWriter finishWritingWithCompletionHandler:^{
+                        // Finish!
+                    }];
+                    
+                    // 後片付け
+                    CVPixelBufferPoolRelease(adaptor.pixelBufferPool);
+                    break;
+                }
+            }
+        }
+    }
+    
+
 }
 
 @end

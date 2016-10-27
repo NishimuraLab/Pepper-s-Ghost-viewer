@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         let end = Int(CMTimeGetSeconds(asset.duration)) * fps
         var images : [UIImage] = []
         
-        //切り出した画像の数岳ループし、フィルターをかけてファイルを作成
+        //切り出した画像の数回ループし、フィルターをかけてファイルを作成
         (0 ..< end).forEach { (i) in
             var time = CMTimeMake(Int64(i), Int32(fps))
             do{
@@ -92,67 +92,70 @@ class ViewController: UIViewController {
             }
         }
         //動画作成
-        imagesToMovie(images: images)
-        
-    }
-    
-    //複数の画像から動画を作成するメソッド
-    func imagesToMovie(images : [UIImage]){
-        
-        let size = [640,360]
         let path = productsPath + filterdMovieName
         let url = URL(fileURLWithPath: path)
         AppUtil.removeFilesWhenInit(path: path)
-        do{
-            let videoWriter = try AVAssetWriter(url: url, fileType: AVFileTypeQuickTimeMovie)
-            let options = [
-                AVVideoCodecKey  : AVVideoCodecH264,
-                AVVideoWidthKey  : size[0],
-                AVVideoHeightKey : size[1]
-            ] as [String : Any]
-            let input = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: options)
-            videoWriter.add(input)
-            
-            let pbAttr = [
-                kCVPixelBufferPixelFormatTypeKey as String : kCVPixelFormatType_32ARGB,
-                kCVPixelBufferWidthKey as String : size[0],
-                kCVPixelBufferHeightKey as String : size[1]
-            ] as [String : Any]
-            
-            let adapter = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: input, sourcePixelBufferAttributes: pbAttr)
-            
-            input.expectsMediaDataInRealTime = true
-            
-            videoWriter.startWriting()
-            videoWriter.startSession(atSourceTime: kCMTimeZero)
-            
-            var buf : CVPixelBuffer?
-            var framecount = 0
-            let duration = 1
-            let fps = 24
-            var count = 0
-            images.forEach({ (image) in
-                if adapter.assetWriterInput.isReadyForMoreMediaData {
-                    let val = Int64(framecount * fps + duration)
-                    let frameTime = CMTimeMake(val, Int32(fps))
-                    buf = AVFoundationUtil.pixelBuffer(from: image.cgImage).takeRetainedValue()
-                    
-                    adapter.append(buf!, withPresentationTime: frameTime)
-                    framecount += 1
-                    print(count)
-                    count += 1
-                }
-            })
-            
-            input.markAsFinished()
-            videoWriter.finishWriting {
-                print("作成終了")
-            }
-        }catch{
-            print("処理中にエラー")
-        }
+        AVFoundationUtil.makeVideo(fromCGImages: url, images)
         
     }
+    
+//    //複数の画像から動画を作成するメソッド
+//    func imagesToMovie(images : [UIImage]){
+//        
+//        let size = [640,360]
+//        let path = productsPath + filterdMovieName
+//        let url = URL(fileURLWithPath: path)
+//        AppUtil.removeFilesWhenInit(path: path)
+//        do{
+//            let videoWriter = try AVAssetWriter(url: url, fileType: AVFileTypeQuickTimeMovie)
+//            let options = [
+//                AVVideoCodecKey  : AVVideoCodecH264,
+//                AVVideoWidthKey  : size[0],
+//                AVVideoHeightKey : size[1]
+//            ] as [String : Any]
+//            let input = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: options)
+//            videoWriter.add(input)
+//            
+//            let pbAttr = [
+//                kCVPixelBufferPixelFormatTypeKey as String : kCVPixelFormatType_32ARGB,
+//                kCVPixelBufferWidthKey as String : size[0],
+//                kCVPixelBufferHeightKey as String : size[1]
+//            ] as [String : Any]
+//            
+//            let adapter = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: input, sourcePixelBufferAttributes: pbAttr)
+//            
+//            input.expectsMediaDataInRealTime = true
+//            
+//            videoWriter.startWriting()
+//            videoWriter.startSession(atSourceTime: kCMTimeZero)
+//            
+//            var buf : CVPixelBuffer?
+//            var framecount = 0
+//            let duration = 1
+//            let fps = 24
+//            var count = 0
+//            images.forEach({ (image) in
+//                if adapter.assetWriterInput.isReadyForMoreMediaData {
+//                    let val = Int64(framecount * fps + duration)
+//                    let frameTime = CMTimeMake(val, Int32(fps))
+//                    buf = AVFoundationUtil.pixelBuffer(from: image.cgImage).takeRetainedValue()
+//                    
+//                    adapter.append(buf!, withPresentationTime: frameTime)
+//                    framecount += 1
+//                    print(count)
+//                    count += 1
+//                }
+//            })
+//            
+//            input.markAsFinished()
+//            videoWriter.finishWriting {
+//                print("作成終了")
+//            }
+//        }catch{
+//            print("処理中にエラー")
+//        }
+//        
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

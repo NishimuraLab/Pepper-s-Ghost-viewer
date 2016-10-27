@@ -33,4 +33,6 @@
 
 + (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image;
 
++ (void)makeVideoFromCGImages:(NSURL*)url : (NSArray<UIImage*>*)images;
+
 @end
