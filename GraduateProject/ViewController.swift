@@ -17,40 +17,66 @@ class ViewController: UIViewController {
     @IBOutlet weak var sView: AVPlayerView!
     
     var playerItem : AVPlayerItem!
-    var asset : AVURLAsset!
+    var originAsset : AVURLAsset!
+    var filteredAsset : AVURLAsset!
     var player : AVQueuePlayer!
     var looper : AVPlayerLooper!
     
-    let imagesPath = "/Users/reastral/Desktop/GraduateProject/images/"
-    let productsPath = "/Users/reastral/Desktop/GraduateProject/products/"
+    let productsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/products/"
     let filterdMovieName = "gray.mov"
     
+    let fileManager = FileManager.default
+    
+    @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var initialView: UIView!
     @IBOutlet weak var progressBar: UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if !fileManager.fileExists(atPath: productsPath) {
+            try! fileManager.createDirectory(at: URL.init(fileURLWithPath: productsPath), withIntermediateDirectories: true, attributes: nil)
+        }
         //動画ソース選択して、AVAssetに
-        let URLString = self.productsPath + filterdMovieName
-        let url = URL.init(fileURLWithPath: URLString)
-        self.asset = AVURLAsset.init(url: url)
+        let URLString = Bundle.main.path(forResource: "N", ofType: "mov")
+        let url = URL.init(fileURLWithPath: URLString!)
+        self.originAsset = AVURLAsset.init(url: url)
         
         //動画を切り出して、フィルターをかける
         DispatchQueue.global(qos: .default).async {
-            self.movie2FilteredImages(asset: self.asset)
+            let images : [UIImage] = self.movie2FilteredImages(asset: self.originAsset)
+            
+            //動画作成
+            DispatchQueue.main.async {
+                self.progressLabel.text = "静止画から動画を作成しています..."
+            }
+            
+            let path = self.productsPath + self.filterdMovieName
+            let url = URL(fileURLWithPath: path)
+            AppUtil.removeFilesWhenInit(path: path)
+            AVFoundationUtil.makeVideo(fromUIImages: url, images)
             DispatchQueue.main.async {
                 //フェードアウトしてPlayerを表示
                 self.fadeOutView(view: self.initialView)
-                
-                //プレイヤーに加工済みのアセットをSet
-                self.playerItem = AVPlayerItem.init(asset: self.asset)
-                //KVO登録
-                self.playerItem.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
-                self.player = AVQueuePlayer(playerItem: self.playerItem)
-                //ルーパーを作成して、動画をループする(iOS10からの機能)
-                self.looper = AVPlayerLooper(player: self.player, templateItem: self.playerItem)
+                self.initPlayer()
             }
         }
+    }
+
+    func initPlayer() {
+        let movieFilePath = self.productsPath + self.filterdMovieName
+        if !fileManager.fileExists(atPath: movieFilePath) {
+            print("作成されたファイルが存在しません")
+            exit(0)
+        }
+        self.filteredAsset = AVURLAsset(url: URL(fileURLWithPath: movieFilePath))
+        //プレイヤーに加工済みのアセットをSet
+        self.playerItem = AVPlayerItem.init(asset: self.filteredAsset)
+        //KVO登録
+        self.playerItem.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
+        self.player = AVQueuePlayer(playerItem: self.playerItem)
+        //ルーパーを作成して、動画をループする(iOS10からの機能)
+        self.looper = AVPlayerLooper(player: self.player, templateItem: self.playerItem)
     }
 
     func fadeOutView(view : UIView){
@@ -62,7 +88,7 @@ class ViewController: UIViewController {
     }
     
     //動画をFPSごとに画像に変換し、フィルターをかけるメソッド
-    func movie2FilteredImages(asset : AVURLAsset){
+    func movie2FilteredImages(asset : AVURLAsset) -> [UIImage]{
         //ローカルから動画を読み出し
         let generator = AVAssetImageGenerator(asset: asset)
         generator.requestedTimeToleranceAfter = kCMTimeZero
@@ -80,11 +106,6 @@ class ViewController: UIViewController {
                 //OpenCVにてフィルター処理
                 let filteredImg = ImageTransform.maskedImage(genImage)
                 images.append(filteredImg!)
-                let data = UIImageJPEGRepresentation(filteredImg!, 0.6)
-                let fileName = String.init(format: imagesPath + "%i.jpg", i)
-                let jpgUrl = URL(fileURLWithPath: fileName)
-                try data?.write(to: jpgUrl)
-                print("書き込み完了")
             }catch{
                 print("Errors has detected!")
             }
@@ -94,12 +115,8 @@ class ViewController: UIViewController {
                 self.progressBar.progress = progress
             }
         }
-        //動画作成
-        let path = productsPath + filterdMovieName
-        let url = URL(fileURLWithPath: path)
-        AppUtil.removeFilesWhenInit(path: path)
-        AVFoundationUtil.makeVideo(fromCGImages: url, images)
         
+        return images
     }
     
     override func didReceiveMemoryWarning() {

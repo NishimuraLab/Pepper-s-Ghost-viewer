@@ -10,7 +10,7 @@ import Foundation
 
 class AppUtil {
     class func removeFilesWhenInit(path : String) {
-        let manager = FileManager()
+        let manager = FileManager.default
         if manager.fileExists(atPath: path) {
             do{
                 try manager.removeItem(atPath: path)

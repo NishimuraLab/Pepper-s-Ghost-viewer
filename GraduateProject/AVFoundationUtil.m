@@ -115,11 +115,10 @@
     return pxbuffer;
 }
 
-+ (void)makeVideoFromCGImages:(NSURL*)url : (NSArray<UIImage*>*)images{
-    NSInteger width = 640;
-    NSInteger height = 360;
++ (void)makeVideoFromUIImages:(NSURL*)url : (NSArray<UIImage*>*)images{
+    NSInteger width = images.firstObject.size.width;
+    NSInteger height = images.firstObject.size.height;
     
-    // パスは適切な保存先を指定
     AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:url fileType:AVFileTypeQuickTimeMovie error:nil];
     // アウトプットの設定
     NSDictionary *outputSettings =
@@ -193,12 +192,8 @@
                     [writerInput markAsFinished];
 //                    [videoWriter endSessionAtSourceTime:CMTimeMake((int64_t)(frameCount - 1) * fps * durationForEachImage, fps)];
                     
-                    [videoWriter finishWritingWithCompletionHandler:^{
-                        // Finish!
-                    }];
-                    
-                    // 後片付け
-                    CVPixelBufferPoolRelease(adaptor.pixelBufferPool);
+                    [videoWriter finishWriting];
+                     CVPixelBufferPoolRelease(adaptor.pixelBufferPool);
                     break;
                 }
             }

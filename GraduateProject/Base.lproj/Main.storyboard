@@ -102,13 +102,14 @@
                         <outlet property="initialView" destination="ocT-hB-7rM" id="gKT-0k-66M"/>
                         <outlet property="nView" destination="nid-p9-8Cz" id="VJn-Pm-j5n"/>
                         <outlet property="progressBar" destination="5Qc-yr-Jid" id="083-3R-aZx"/>
+                        <outlet property="progressLabel" destination="2f2-vn-fn5" id="7zs-dX-OeM"/>
                         <outlet property="sView" destination="KQl-JW-W4c" id="Ouy-hY-dRw"/>
                         <outlet property="wView" destination="0S4-GH-j9U" id="EM9-SQ-dKa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
+            <point key="canvasLocation" x="-12" y="36"/>
         </scene>
     </scenes>
 </document>
