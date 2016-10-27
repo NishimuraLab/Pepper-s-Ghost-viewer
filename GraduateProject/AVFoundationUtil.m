@@ -156,19 +156,12 @@
     
     // 動画生成開始
     [videoWriter startSessionAtSourceTime:kCMTimeZero];
-
-    
     // pixel bufferを宣言
     CVPixelBufferRef buffer = NULL;
-    
     // 現在のフレームカウント
     int i = 1;
-    
-    // 各画像の表示する時間
-    int durationForEachImage = 1;
-    
     // FPS
-    int32_t fps = 24;
+    int32_t fps = 20;
     
     // 全画像をバッファに貯めこむ
     // Quoted by http://iphonedevsdk.com/forum/iphone-sdk-development/77999-make-a-video-from-nsarray-of-uiimages.html
@@ -177,8 +170,8 @@
         @autoreleasepool {
             if (writerInput.readyForMoreMediaData) {
                 
-                CMTime frameTime = CMTimeMake(1, 20);
-                CMTime lastTime=CMTimeMake(i, 20);
+                CMTime frameTime = CMTimeMake(1, fps);
+                CMTime lastTime=CMTimeMake(i, fps);
                 CMTime presentTime=CMTimeAdd(lastTime, frameTime);
                 
                 // 動画の時間を生成（その画像の表示する時間。開始時点と表示時間を渡す）

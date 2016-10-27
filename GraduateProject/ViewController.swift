@@ -31,23 +31,26 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //動画ソース選択して、AVAssetに
-        let URLString = Bundle.main.path(forResource: "N", ofType: "mov")
-        let url = URL.init(fileURLWithPath: URLString!)
-        asset = AVURLAsset.init(url: url)
+        let URLString = self.productsPath + filterdMovieName
+        let url = URL.init(fileURLWithPath: URLString)
+        self.asset = AVURLAsset.init(url: url)
+        
         //動画を切り出して、フィルターをかける
         DispatchQueue.global(qos: .default).async {
             self.movie2FilteredImages(asset: self.asset)
             DispatchQueue.main.async {
+                //フェードアウトしてPlayerを表示
                 self.fadeOutView(view: self.initialView)
+                
+                //プレイヤーに加工済みのアセットをSet
+                self.playerItem = AVPlayerItem.init(asset: self.asset)
+                //KVO登録
+                self.playerItem.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
+                self.player = AVQueuePlayer(playerItem: self.playerItem)
+                //ルーパーを作成して、動画をループする(iOS10からの機能)
+                self.looper = AVPlayerLooper(player: self.player, templateItem: self.playerItem)
             }
         }
-
-        playerItem = AVPlayerItem.init(asset: asset)
-        //KVO登録
-        playerItem.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
-        player = AVQueuePlayer(playerItem: playerItem)
-        //ルーパーを作成して、動画をループする(iOS10からの機能)
-        looper = AVPlayerLooper(player: player, templateItem: playerItem)
     }
 
     func fadeOutView(view : UIView){
@@ -98,64 +101,6 @@ class ViewController: UIViewController {
         AVFoundationUtil.makeVideo(fromCGImages: url, images)
         
     }
-    
-//    //複数の画像から動画を作成するメソッド
-//    func imagesToMovie(images : [UIImage]){
-//        
-//        let size = [640,360]
-//        let path = productsPath + filterdMovieName
-//        let url = URL(fileURLWithPath: path)
-//        AppUtil.removeFilesWhenInit(path: path)
-//        do{
-//            let videoWriter = try AVAssetWriter(url: url, fileType: AVFileTypeQuickTimeMovie)
-//            let options = [
-//                AVVideoCodecKey  : AVVideoCodecH264,
-//                AVVideoWidthKey  : size[0],
-//                AVVideoHeightKey : size[1]
-//            ] as [String : Any]
-//            let input = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: options)
-//            videoWriter.add(input)
-//            
-//            let pbAttr = [
-//                kCVPixelBufferPixelFormatTypeKey as String : kCVPixelFormatType_32ARGB,
-//                kCVPixelBufferWidthKey as String : size[0],
-//                kCVPixelBufferHeightKey as String : size[1]
-//            ] as [String : Any]
-//            
-//            let adapter = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: input, sourcePixelBufferAttributes: pbAttr)
-//            
-//            input.expectsMediaDataInRealTime = true
-//            
-//            videoWriter.startWriting()
-//            videoWriter.startSession(atSourceTime: kCMTimeZero)
-//            
-//            var buf : CVPixelBuffer?
-//            var framecount = 0
-//            let duration = 1
-//            let fps = 24
-//            var count = 0
-//            images.forEach({ (image) in
-//                if adapter.assetWriterInput.isReadyForMoreMediaData {
-//                    let val = Int64(framecount * fps + duration)
-//                    let frameTime = CMTimeMake(val, Int32(fps))
-//                    buf = AVFoundationUtil.pixelBuffer(from: image.cgImage).takeRetainedValue()
-//                    
-//                    adapter.append(buf!, withPresentationTime: frameTime)
-//                    framecount += 1
-//                    print(count)
-//                    count += 1
-//                }
-//            })
-//            
-//            input.markAsFinished()
-//            videoWriter.finishWriting {
-//                print("作成終了")
-//            }
-//        }catch{
-//            print("処理中にエラー")
-//        }
-//        
-//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
