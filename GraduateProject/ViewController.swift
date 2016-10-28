@@ -104,7 +104,7 @@ class ViewController: UIViewController {
                 let image : CGImage = try generator.copyCGImage(at: time, actualTime: &time)
                 let genImage : UIImage = UIImage(cgImage: image)
                 //OpenCVにてフィルター処理
-                let filteredImg = ImageTransform.maskedImage(genImage)
+                let filteredImg = ImageTransform.extractObjectImage(genImage, UIImage(named: "nBack.png"))
                 images.append(filteredImg!)
             }catch{
                 print("Errors has detected!")

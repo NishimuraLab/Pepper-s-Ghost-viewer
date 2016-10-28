@@ -9,6 +9,6 @@
 #import "AVFoundationUtil.h"
 @interface ImageTransform : NSObject
 
-+ (UIImage *)MaskedImage:(UIImage *)objectImg;
++ (UIImage *)extractObjectImage:(UIImage *)targetImg : (UIImage *)backImg;
 
 @end

@@ -16,17 +16,18 @@
 
 @implementation ImageTransform
 
-+ (UIImage *)MaskedImage:(UIImage *)objectImg{
-    cv::Mat src, gray;
-    UIImageToMat(objectImg, src);
-    //    UIImageToMat(backImg, back);
-    cv::cvtColor(src, gray, CV_RGB2GRAY);
++ (UIImage *)extractObjectImage:(UIImage *)targetImg : (UIImage *)backImg{
+    //Mat系に変換
+    cv::Mat targetMat, backMat, outputMat, mask;
+    cv::UMat src, back, output;
+    UIImageToMat(targetImg, targetMat);
+    UIImageToMat(backImg, backMat);
     
-//    mask = src.clone();
-    //    cv::cvtColor(mask, mask, cv::COLOR_RGB2GRAY);
-    
-//    src.copyTo(back, mask);
-    
-    return MatToUIImage(gray);
+    //背景差分アルゴリズムの選択
+//    cv::Ptr< cv::BackgroundSubtractor> substractor = cv::createBackgroundSubtractorMOG2();
+    cv::Ptr< cv::BackgroundSubtractor> substractor = cv::createBackgroundSubtractorKNN();
+//    substractor->apply(targetMat, mask);
+    cv::absdiff(targetMat, backMat, outputMat);
+    return MatToUIImage(outputMat);
 }
 @end

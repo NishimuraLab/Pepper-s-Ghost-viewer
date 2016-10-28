@@ -21,6 +21,7 @@
 		D34AABFD1DBB41C300162974 /* S.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABF91DBB41C300162974 /* S.mov */; };
 		D34AABFE1DBB41C300162974 /* W.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABFA1DBB41C300162974 /* W.mov */; };
 		D35F6F141DC0C22B00D42ACE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F6F131DC0C22B00D42ACE /* Util.swift */; };
+		D3739C9D1DC2644A007B1F82 /* nBack.png in Resources */ = {isa = PBXBuildFile; fileRef = D3739C9C1DC2644A007B1F82 /* nBack.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		D34AABF91DBB41C300162974 /* S.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = S.mov; sourceTree = "<group>"; };
 		D34AABFA1DBB41C300162974 /* W.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = W.mov; sourceTree = "<group>"; };
 		D35F6F131DC0C22B00D42ACE /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Util.swift; path = ../Util.swift; sourceTree = "<group>"; };
+		D3739C9C1DC2644A007B1F82 /* nBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nBack.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			children = (
 				D3156D7A1DBA226C0076D109 /* GraduateProject */,
 				D3156D791DBA226C0076D109 /* Products */,
+				D3739C9B1DC2644A007B1F82 /* images */,
 				D34AABF61DBB41C300162974 /* movies */,
 				A4CFE241F4546398D64D8E1D /* Pods */,
 				B50DC38F06B0143C4B6A7BB6 /* Frameworks */,
@@ -158,6 +161,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		D3739C9B1DC2644A007B1F82 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				D3739C9C1DC2644A007B1F82 /* nBack.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -225,6 +236,7 @@
 				D34AABFD1DBB41C300162974 /* S.mov in Resources */,
 				D3156D861DBA226C0076D109 /* LaunchScreen.storyboard in Resources */,
 				D34AABFC1DBB41C300162974 /* N.mov in Resources */,
+				D3739C9D1DC2644A007B1F82 /* nBack.png in Resources */,
 				D3156D831DBA226C0076D109 /* Assets.xcassets in Resources */,
 				D34AABFB1DBB41C300162974 /* E.mov in Resources */,
 				D3156D811DBA226C0076D109 /* Main.storyboard in Resources */,
