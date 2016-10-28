@@ -14,20 +14,34 @@
 #import <opencv2/imgcodecs/ios.h>
 #import <opencv2/highgui/highgui.hpp>
 
+
 @implementation ImageTransform
 
-+ (UIImage *)extractObjectImage:(UIImage *)targetImg : (UIImage *)backImg{
-    //Mat系に変換
+//背景差分アルゴリズムの選択
+//    cv::Ptr< cv::BackgroundSubtractor> substractor = cv::createBackgroundSubtractorMOG2();
+cv::Ptr< cv::BackgroundSubtractor> substractor = cv::createBackgroundSubtractorKNN();
+
++ (UIImage *)extractObjectImage:(UIImage *)targetImg{
+    //Mat初期化
     cv::Mat targetMat, backMat, outputMat, mask;
-    cv::UMat src, back, output;
+    //UIImageへ変換
+    UIImageToMat(targetImg, targetMat);
+    //MOG2に入れて処理をかけ、mask画像を入手
+    substractor->apply(targetMat, mask);
+    //outputへmaskしたimageを渡す
+    targetMat.copyTo(outputMat, mask);
+    return MatToUIImage(outputMat);
+}
+
++ (UIImage *)extractObjectImgWithBackImg:(UIImage *)targetImg : (UIImage *)backImg{
+    cv::Mat targetMat, backMat, outputMat;
+    
     UIImageToMat(targetImg, targetMat);
     UIImageToMat(backImg, backMat);
-    
-    //背景差分アルゴリズムの選択
-//    cv::Ptr< cv::BackgroundSubtractor> substractor = cv::createBackgroundSubtractorMOG2();
-    cv::Ptr< cv::BackgroundSubtractor> substractor = cv::createBackgroundSubtractorKNN();
-//    substractor->apply(targetMat, mask);
     cv::absdiff(targetMat, backMat, outputMat);
+    
     return MatToUIImage(outputMat);
 }
 @end
+
+

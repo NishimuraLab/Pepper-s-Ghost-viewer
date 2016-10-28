@@ -174,7 +174,6 @@
                 CMTime presentTime=CMTimeAdd(lastTime, frameTime);
                 
                 // 動画の時間を生成（その画像の表示する時間。開始時点と表示時間を渡す）
-                
                 // CGImageからバッファを生成
                 if(i >= images.count){
                     buffer = NULL;
@@ -184,14 +183,11 @@
                 }
                 
                 if(buffer){
-                    NSLog(@"%d",i);
                     [adaptor appendPixelBuffer:buffer withPresentationTime:presentTime];
                     i++;
                 }else{
                     // 動画生成終了
                     [writerInput markAsFinished];
-//                    [videoWriter endSessionAtSourceTime:CMTimeMake((int64_t)(frameCount - 1) * fps * durationForEachImage, fps)];
-                    
                     [videoWriter finishWriting];
                      CVPixelBufferPoolRelease(adaptor.pixelBufferPool);
                     break;
@@ -199,8 +195,6 @@
             }
         }
     }
-    
-
 }
 
 @end
