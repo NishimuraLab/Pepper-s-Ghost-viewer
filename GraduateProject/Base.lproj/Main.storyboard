@@ -61,13 +61,24 @@
                                             <constraint firstAttribute="width" constant="302" id="6hF-np-ysW"/>
                                         </constraints>
                                     </progressView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CP6-Th-wNd" userLabel="Percent">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="abh-SE-M9d"/>
+                                            <constraint firstAttribute="height" constant="44" id="vNJ-dU-AQC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="2f2-vn-fn5" firstAttribute="top" secondItem="fsb-kL-Wrk" secondAttribute="bottom" constant="30" id="6yO-gh-Q5x"/>
                                     <constraint firstItem="5Qc-yr-Jid" firstAttribute="centerX" secondItem="ocT-hB-7rM" secondAttribute="centerX" id="7l6-ne-nuY"/>
                                     <constraint firstItem="2f2-vn-fn5" firstAttribute="centerX" secondItem="ocT-hB-7rM" secondAttribute="centerX" id="IqJ-d6-cOr"/>
+                                    <constraint firstItem="CP6-Th-wNd" firstAttribute="centerX" secondItem="ocT-hB-7rM" secondAttribute="centerX" id="OCW-ZW-OSa"/>
                                     <constraint firstItem="fsb-kL-Wrk" firstAttribute="centerX" secondItem="ocT-hB-7rM" secondAttribute="centerX" id="Puo-Fy-ggz"/>
+                                    <constraint firstItem="CP6-Th-wNd" firstAttribute="top" secondItem="2f2-vn-fn5" secondAttribute="bottom" constant="8" id="gBT-Tu-peG"/>
                                     <constraint firstAttribute="bottom" secondItem="2f2-vn-fn5" secondAttribute="bottom" constant="112" id="rap-ua-ewx"/>
                                     <constraint firstAttribute="bottom" secondItem="5Qc-yr-Jid" secondAttribute="bottom" constant="50" id="zxw-ax-v2Z"/>
                                 </constraints>
@@ -101,6 +112,7 @@
                         <outlet property="eView" destination="Jke-p8-7hJ" id="0Nj-kB-L5Y"/>
                         <outlet property="initialView" destination="ocT-hB-7rM" id="gKT-0k-66M"/>
                         <outlet property="nView" destination="nid-p9-8Cz" id="VJn-Pm-j5n"/>
+                        <outlet property="percentLabel" destination="CP6-Th-wNd" id="r0u-WB-m1E"/>
                         <outlet property="progressBar" destination="5Qc-yr-Jid" id="083-3R-aZx"/>
                         <outlet property="progressLabel" destination="2f2-vn-fn5" id="7zs-dX-OeM"/>
                         <outlet property="sView" destination="KQl-JW-W4c" id="Ouy-hY-dRw"/>
@@ -109,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12" y="36"/>
+            <point key="canvasLocation" x="-12" y="35.532233883058474"/>
         </scene>
     </scenes>
 </document>

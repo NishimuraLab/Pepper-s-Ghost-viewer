@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var initialView: UIView!
     @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var percentLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,7 @@ class ViewController: UIViewController {
             let path = self.productsPath + self.filterdMovieName
             let url = URL(fileURLWithPath: path)
             AppUtil.removeFilesWhenInit(path: path)
-            AVFoundationUtil.makeVideo(fromUIImages: url, images)
+            AVFoundationUtil.makeVideo(fromUIImages: self, url, images)
             DispatchQueue.main.async {
                 //フェードアウトしてPlayerを表示
                 self.fadeOutView(view: self.initialView)
@@ -113,6 +114,8 @@ class ViewController: UIViewController {
                 //Progress更新
                 let progress  = Float(i) / Float(end)
                 self.progressBar.progress = progress
+                let percent = Int(ceil(progress * 100))
+                self.percentLabel.text = String(percent) + "%"
             }
         }
         

@@ -7,6 +7,7 @@
 //
 #import "UIKit/UIKit.h"
 #import "AVFoundationUtil.h"
+#import "GraduateProject-Swift.h"
 
 @implementation AVFoundationUtil
 
@@ -115,9 +116,11 @@
     return pxbuffer;
 }
 
-+ (void)makeVideoFromUIImages:(NSURL*)url : (NSArray<UIImage*>*)images{
++ (void)makeVideoFromUIImages:(UIViewController*)caller : (NSURL*)url : (NSArray<UIImage*>*)images{
     NSInteger width = images.firstObject.size.width;
     NSInteger height = images.firstObject.size.height;
+    
+    ViewController* vc = (ViewController*)caller;
     
     AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:url fileType:AVFileTypeQuickTimeMovie error:nil];
     // アウトプットの設定
@@ -184,6 +187,13 @@
                 
                 if(buffer){
                     [adaptor appendPixelBuffer:buffer withPresentationTime:presentTime];
+                    if(vc != NULL){
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            float progress = (float)i / images.count;
+                            vc.progressBar.progress = progress;
+                            vc.percentLabel.text = [NSString stringWithFormat:@"%d%%",(int)ceil(progress * 100)];
+                        });
+                    }
                     i++;
                 }else{
                     // 動画生成終了

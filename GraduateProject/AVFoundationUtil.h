@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreVideo/CoreVideo.h>
 
+
 /**
  AVFoundation.framework用ユーティリティクラス
  */
@@ -33,6 +34,6 @@
 
 + (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image;
 
-+ (void)makeVideoFromUIImages:(NSURL*)url : (NSArray<UIImage*>*)images;
++ (void)makeVideoFromUIImages:(UIViewController*)caller : (NSURL*)url : (NSArray<UIImage*>*)images;
 
 @end
