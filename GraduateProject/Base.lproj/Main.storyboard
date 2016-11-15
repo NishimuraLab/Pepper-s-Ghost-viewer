@@ -1,17 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wzl-av-DUI">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Initial View Controller-->
+        <scene sceneID="ed0-eD-Xeu">
+            <objects>
+                <viewController id="Wzl-av-DUI" customClass="InitialViewController" customModule="GraduateProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fEv-v0-RtU"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qsj-HY-OO7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5RW-wE-AEe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kM7-6Z-5Z1">
+                                <rect key="frame" x="87" y="441" width="200" height="126"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="126" id="78R-IO-mep"/>
+                                    <constraint firstAttribute="width" constant="200" id="hIF-6q-9Ec"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="動画を選ぶ">
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapSelectMedia:" destination="Wzl-av-DUI" eventType="touchUpInside" id="06p-9c-KWZ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="卒業研究アプリ(仮)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbu-60-AFY">
+                                <rect key="frame" x="44" y="190" width="286" height="67"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="67" id="Xg8-6W-KE2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright All Reserved by Shalman." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzy-hk-gPv">
+                                <rect key="frame" x="60" y="626" width="273" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="cg3-uD-pew"/>
+                                    <constraint firstAttribute="width" constant="273" id="wG8-Gq-aqo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Kbu-60-AFY" firstAttribute="leading" secondItem="5RW-wE-AEe" secondAttribute="leading" constant="44" id="DMS-Kt-Wnf"/>
+                            <constraint firstItem="kM7-6Z-5Z1" firstAttribute="centerX" secondItem="5RW-wE-AEe" secondAttribute="centerX" id="EJU-Js-wJf"/>
+                            <constraint firstItem="Kbu-60-AFY" firstAttribute="centerX" secondItem="5RW-wE-AEe" secondAttribute="centerX" id="HvI-mp-6eJ"/>
+                            <constraint firstItem="Uzy-hk-gPv" firstAttribute="centerX" secondItem="5RW-wE-AEe" secondAttribute="centerX" constant="9" id="Pfh-yT-iee"/>
+                            <constraint firstItem="Qsj-HY-OO7" firstAttribute="top" secondItem="Uzy-hk-gPv" secondAttribute="bottom" constant="20" id="SU1-IL-AHs"/>
+                            <constraint firstItem="Qsj-HY-OO7" firstAttribute="top" secondItem="kM7-6Z-5Z1" secondAttribute="bottom" constant="100" id="Vki-U0-YkJ"/>
+                            <constraint firstItem="Kbu-60-AFY" firstAttribute="top" secondItem="fEv-v0-RtU" secondAttribute="bottom" constant="126" id="cJE-1G-jjx"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="LEl-rM-WQH"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FCW-Nx-25K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-946.39999999999998" y="35.532233883058474"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GraduateProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="GraduateProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,6 +87,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nid-p9-8Cz" userLabel="NorthView" customClass="AVPlayerView" customModule="GraduateProject" customModuleProvider="target">
+                                <rect key="frame" x="50" y="41.5" width="275" height="154.5"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="height" multiplier="16:9" id="1YM-dW-usy"/>
@@ -28,15 +95,19 @@
                                 </constraints>
                             </view>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jke-p8-7hJ" userLabel="EastView" customClass="AVPlayerView" customModule="GraduateProject" customModuleProvider="target">
+                                <rect key="frame" x="187.5" y="256" width="275" height="155"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0S4-GH-j9U" userLabel="WestView" customClass="AVPlayerView" customModule="GraduateProject" customModuleProvider="target">
+                                <rect key="frame" x="-87.5" y="256" width="275" height="155"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQl-JW-W4c" userLabel="SouthView" customClass="AVPlayerView" customModule="GraduateProject" customModuleProvider="target">
+                                <rect key="frame" x="50" y="471" width="275" height="154.5"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MrB-uy-wJ5" userLabel="CenterPosition">
+                                <rect key="frame" x="162.5" y="308.5" width="50" height="50"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="aIJ-Gd-KAq"/>
@@ -44,24 +115,29 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocT-hB-7rM" userLabel="InitialBack">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="動画を切り出しています..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2f2-vn-fn5">
+                                        <rect key="frame" x="89" y="514.5" width="197" height="20.5"/>
                                         <fontDescription key="fontDescription" name="MalayalamSangamMN" family="Malayalam Sangam MN" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="fsb-kL-Wrk">
+                                        <rect key="frame" x="172.5" y="454.5" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="fsb-kL-Wrk" secondAttribute="height" multiplier="1:1" id="d7Y-h7-mvu"/>
                                             <constraint firstAttribute="width" constant="30" id="zda-n2-VtW"/>
                                         </constraints>
                                     </activityIndicatorView>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Qc-yr-Jid">
+                                        <rect key="frame" x="36.5" y="595" width="302" height="2"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="302" id="6hF-np-ysW"/>
                                         </constraints>
                                     </progressView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CP6-Th-wNd" userLabel="Percent">
+                                        <rect key="frame" x="147.5" y="543" width="80" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="abh-SE-M9d"/>
                                             <constraint firstAttribute="height" constant="44" id="vNJ-dU-AQC"/>

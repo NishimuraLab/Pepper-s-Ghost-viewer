@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     var player : AVQueuePlayer!
     var looper : AVPlayerLooper!
     
+    open var assetURL : URL?
+    
     let productsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/products/"
     let filterdMovieName = "gray.mov"
     
@@ -34,14 +36,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if !fileManager.fileExists(atPath: productsPath) {
             try! fileManager.createDirectory(at: URL.init(fileURLWithPath: productsPath), withIntermediateDirectories: true, attributes: nil)
         }
+        if assetURL == nil {
+            let URLString = Bundle.main.path(forResource: "N", ofType: "mov")
+            assetURL = URL.init(fileURLWithPath: URLString!)
+        }
         //動画ソース選択して、AVAssetに
-        let URLString = Bundle.main.path(forResource: "N", ofType: "mov")
-        let url = URL.init(fileURLWithPath: URLString!)
-        self.originAsset = AVURLAsset.init(url: url)
+        self.originAsset = AVURLAsset.init(url: assetURL!)
         
         //動画を切り出して、フィルターをかける
         DispatchQueue.global(qos: .default).async {
