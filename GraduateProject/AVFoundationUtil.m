@@ -116,7 +116,7 @@
     return pxbuffer;
 }
 
-+ (void)makeVideoFromUIImages:(UIViewController*)caller : (NSURL*)url : (NSArray<UIImage*>*)images{
++ (void)makeVideoFromUIImages:(UIViewController*)caller : (NSURL*)url : (NSArray<UIImage*>*)images : (int32_t)_fps{
     NSInteger width = images.firstObject.size.width;
     NSInteger height = images.firstObject.size.height;
     
@@ -163,7 +163,7 @@
     // 現在のフレームカウント
     int i = 1;
     // FPS
-    int32_t fps = 20;
+    int32_t fps = _fps;
     
     // 全画像をバッファに貯めこむ
     // Quoted by http://iphonedevsdk.com/forum/iphone-sdk-development/77999-make-a-video-from-nsarray-of-uiimages.html

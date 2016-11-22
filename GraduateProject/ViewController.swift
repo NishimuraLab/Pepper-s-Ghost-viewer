@@ -28,7 +28,6 @@ class ViewController: UIViewController {
     let filterdMovieName = "gray.mov"
     
     let fileManager = FileManager.default
-    
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var initialView: UIView!
     @IBOutlet weak var progressBar: UIProgressView!
@@ -58,7 +57,7 @@ class ViewController: UIViewController {
             let path = self.productsPath + self.filterdMovieName
             let url = URL(fileURLWithPath: path)
             AppUtil.removeFilesWhenInit(path: path)
-            AVFoundationUtil.makeVideo(fromUIImages: self, url, images)
+            AVFoundationUtil.makeVideo(fromUIImages: self, url, images, Int32(AppUtil.fps))
             DispatchQueue.main.async {
                 //フェードアウトしてPlayerを表示
                 self.fadeOutView(view: self.initialView)
@@ -97,7 +96,8 @@ class ViewController: UIViewController {
         let generator = AVAssetImageGenerator(asset: asset)
         generator.requestedTimeToleranceAfter = kCMTimeZero
         generator.requestedTimeToleranceBefore = kCMTimeZero
-        let fps = 20
+        generator.maximumSize = AppUtil.size
+        let fps = AppUtil.fps
         let end = Int(CMTimeGetSeconds(asset.duration)) * fps
         var images : [UIImage] = []
         
@@ -121,6 +121,8 @@ class ViewController: UIViewController {
                 self.percentLabel.text = String(percent) + "%"
             }
         }
+        //メモリ解放
+        ImageTransform.unsetSubstructor()
         
         return images
     }

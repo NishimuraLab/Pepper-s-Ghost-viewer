@@ -27,7 +27,7 @@ class InitialViewController : UIViewController, UIImagePickerControllerDelegate,
             controller.delegate = self
             controller.sourceType = .photoLibrary
             controller.mediaTypes = ["public.movie"]
-            controller.videoQuality = .typeLow
+            controller.videoQuality = .type640x480
             present(controller, animated: true, completion: nil)
         }
     }

@@ -9,6 +9,11 @@
 import UIKit
 
 class AppUtil {
+    //Config
+    static let fps = 20;
+    static let size = CGSize(width: 640, height: 480)
+    
+    //Util Functions
     class func removeFilesWhenInit(path : String) {
         let manager = FileManager.default
         if manager.fileExists(atPath: path) {

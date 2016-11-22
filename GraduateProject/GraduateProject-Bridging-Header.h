@@ -11,5 +11,6 @@
 
 + (UIImage *)extractObjectImage:(UIImage *)targetImg;
 + (UIImage *)extractObjectImgWithBackImg:(UIImage *)targetImg : (UIImage *)backImg;
++ (void)unsetSubstructor;
 
 @end

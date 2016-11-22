@@ -34,6 +34,6 @@
 
 + (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image;
 
-+ (void)makeVideoFromUIImages:(UIViewController*)caller : (NSURL*)url : (NSArray<UIImage*>*)images;
++ (void)makeVideoFromUIImages:(UIViewController*)caller : (NSURL*)url : (NSArray<UIImage*>*)images : (int32_t)_fps;
 
 @end
