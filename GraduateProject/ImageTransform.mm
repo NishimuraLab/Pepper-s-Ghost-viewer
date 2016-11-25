@@ -18,9 +18,15 @@
 @implementation ImageTransform
 
 //背景差分アルゴリズムの選択
-//cv::Ptr< cv::BackgroundSubtractor> substractor = cv::createBackgroundSubtractorMOG2();
-cv::Ptr< cv::BackgroundSubtractor> substractor = cv::createBackgroundSubtractorKNN();
+cv::Ptr< cv::BackgroundSubtractor> substractor;
 
++ (void)setSubstructor:(int)type{
+    if(type == 0){
+        substractor = cv::createBackgroundSubtractorKNN();
+    }else{
+        substractor = cv::createBackgroundSubtractorMOG2();
+    }
+}
 
 + (UIImage *)extractObjectImage:(UIImage *)targetImg{
     //Mat初期化

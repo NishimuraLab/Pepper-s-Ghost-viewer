@@ -22,6 +22,9 @@
 		D34AABFD1DBB41C300162974 /* S.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABF91DBB41C300162974 /* S.mov */; };
 		D34AABFE1DBB41C300162974 /* W.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABFA1DBB41C300162974 /* W.mov */; };
 		D3739C9D1DC2644A007B1F82 /* nBack.png in Resources */ = {isa = PBXBuildFile; fileRef = D3739C9C1DC2644A007B1F82 /* nBack.png */; };
+		D3B650251DE820C800591511 /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = D3B650241DE820C800591511 /* test.mov */; };
+		D3B650281DE8275A00591511 /* test2.mov in Resources */ = {isa = PBXBuildFile; fileRef = D3B650271DE8275A00591511 /* test2.mov */; };
+		D3B6502A1DE82C9200591511 /* OptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B650291DE82C9200591511 /* OptionTVC.swift */; };
 		D3EF243F1DD5D3BD009400DE /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF243E1DD5D3BD009400DE /* AppUtil.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +51,9 @@
 		D34AABF91DBB41C300162974 /* S.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = S.mov; sourceTree = "<group>"; };
 		D34AABFA1DBB41C300162974 /* W.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = W.mov; sourceTree = "<group>"; };
 		D3739C9C1DC2644A007B1F82 /* nBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nBack.png; sourceTree = "<group>"; };
+		D3B650241DE820C800591511 /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = test.mov; path = ../../test.mov; sourceTree = "<group>"; };
+		D3B650271DE8275A00591511 /* test2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = test2.mov; path = ../../test2.mov; sourceTree = "<group>"; };
+		D3B650291DE82C9200591511 /* OptionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTVC.swift; sourceTree = "<group>"; };
 		D3EF243E1DD5D3BD009400DE /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -141,6 +147,7 @@
 			children = (
 				D31B05841DC8987A003222A3 /* InitialViewController.swift */,
 				D3156D7D1DBA226C0076D109 /* ViewController.swift */,
+				D3B650291DE82C9200591511 /* OptionTVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -148,6 +155,8 @@
 		D34AABF61DBB41C300162974 /* movies */ = {
 			isa = PBXGroup;
 			children = (
+				D3B650271DE8275A00591511 /* test2.mov */,
+				D3B650241DE820C800591511 /* test.mov */,
 				D34AABF71DBB41C300162974 /* E.mov */,
 				D34AABF81DBB41C300162974 /* N.mov */,
 				D34AABF91DBB41C300162974 /* S.mov */,
@@ -237,11 +246,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D34AABFD1DBB41C300162974 /* S.mov in Resources */,
+				D3B650281DE8275A00591511 /* test2.mov in Resources */,
 				D3156D861DBA226C0076D109 /* LaunchScreen.storyboard in Resources */,
 				D34AABFC1DBB41C300162974 /* N.mov in Resources */,
 				D3739C9D1DC2644A007B1F82 /* nBack.png in Resources */,
 				D3156D831DBA226C0076D109 /* Assets.xcassets in Resources */,
 				D34AABFB1DBB41C300162974 /* E.mov in Resources */,
+				D3B650251DE820C800591511 /* test.mov in Resources */,
 				D3156D811DBA226C0076D109 /* Main.storyboard in Resources */,
 				D34AABFE1DBB41C300162974 /* W.mov in Resources */,
 			);
@@ -302,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3B6502A1DE82C9200591511 /* OptionTVC.swift in Sources */,
 				D34AABF41DBB3EA800162974 /* AVPlayerView.swift in Sources */,
 				D31B05851DC8987A003222A3 /* InitialViewController.swift in Sources */,
 				D3EF243F1DD5D3BD009400DE /* AppUtil.swift in Sources */,

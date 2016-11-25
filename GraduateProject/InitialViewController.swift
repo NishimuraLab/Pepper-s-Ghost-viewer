@@ -15,13 +15,14 @@ class InitialViewController : UIViewController, UIImagePickerControllerDelegate,
     }
     
     override func viewDidAppear(_ animated: Bool) {
+
+    }
+
+    @IBAction func onTapSelectMedia(_ sender: Any) {
         if !AppUtil.isiPhone6Or6S() {
             let vc : ViewController = AppUtil.viewControllerFromId(id: "ViewController") as! ViewController
             present(vc, animated: false, completion: nil)
         }
-    }
-
-    @IBAction func onTapSelectMedia(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let controller = UIImagePickerController()
             controller.delegate = self

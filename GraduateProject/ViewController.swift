@@ -45,6 +45,9 @@ class ViewController: UIViewController {
         //動画ソース選択して、AVAssetに
         self.originAsset = AVURLAsset.init(url: assetURL!)
         
+        
+        //差分アルゴリズムを設定
+        ImageTransform.setSubstructor(Int32(UserDefaults.standard.integer(forKey: ALGORITHM)))
         //動画を切り出して、フィルターをかける
         DispatchQueue.global(qos: .default).async {
             let images : [UIImage] = self.movie2FilteredImages(asset: self.originAsset)

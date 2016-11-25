@@ -8,10 +8,18 @@
 
 import UIKit
 
+//UsersDefault
+let ALGORITHM = "ALGORITHM"
+enum AlgorithmType : Int {
+    case KNN
+    case MOG2
+}
+
 class AppUtil {
     //Config
     static let fps = 20;
     static let size = CGSize(width: 640, height: 480)
+
     
     //Util Functions
     class func removeFilesWhenInit(path : String) {
