@@ -25,10 +25,12 @@ class InitialViewController : UIViewController, UIImagePickerControllerDelegate,
         
     }
 
+    @IBAction func onTapSampleMovie(_ sender: Any) {
+        presentMovieView()
+    }
     @IBAction func onTapSelectMedia(_ sender: Any) {
         if !AppUtil.isiPhone6Or6S() {
-            let vc : ViewController = AppUtil.viewControllerFromId(id: "ViewController") as! ViewController
-            present(vc, animated: false, completion: nil)
+            presentMovieView()
         }
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let controller = UIImagePickerController()
@@ -52,6 +54,11 @@ class InitialViewController : UIViewController, UIImagePickerControllerDelegate,
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func presentMovieView() {
+        let vc : ViewController = AppUtil.viewControllerFromId(id: "ViewController") as! ViewController
+        present(vc, animated: false, completion: nil)
     }
 
 }

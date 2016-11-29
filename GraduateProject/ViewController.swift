@@ -163,6 +163,11 @@ class ViewController: UIViewController {
                 eView.player.play()
                 wView.player.play()
                 sView.player.play()
+                
+//                nView.isHidden = true
+//                eView.isHidden = true
+//                wView.isHidden = true
+                
             case .failed:
                 print("再生に失敗しました")
             case .unknown:

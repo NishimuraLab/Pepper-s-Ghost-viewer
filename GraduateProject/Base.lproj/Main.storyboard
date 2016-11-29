@@ -30,13 +30,28 @@
                                 <rect key="frame" x="51" y="0.0" width="272" height="667"/>
                                 <color key="backgroundColor" red="0.1738493357" green="0.6069681187" blue="0.52254512919999996" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kM7-6Z-5Z1">
-                                <rect key="frame" x="87" y="428" width="200" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q95-Bw-nrD" userLabel="サンプル動画">
+                                <rect key="frame" x="87" y="420" width="200" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="78R-IO-mep"/>
+                                    <constraint firstAttribute="width" constant="200" id="6dc-Ln-Vlj"/>
+                                    <constraint firstAttribute="height" constant="40" id="Swj-zG-uQX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="サンプル動画">
+                                    <color key="titleColor" red="0.85882352939999995" green="0.2901960784" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTapSampleMovie:" destination="Wzl-av-DUI" eventType="touchUpInside" id="5HS-Sg-W9U"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kM7-6Z-5Z1">
+                                <rect key="frame" x="87" y="468" width="200" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="78R-IO-mep"/>
                                     <constraint firstAttribute="width" constant="200" id="hIF-6q-9Ec"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="動画を選ぶ">
                                     <color key="titleColor" red="0.85882352939999995" green="0.2901960784" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -65,12 +80,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Jc-hb-qEE">
-                                <rect key="frame" x="52" y="516" width="271" height="50"/>
+                                <rect key="frame" x="52" y="516" width="271" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="C6U-gI-n9u"/>
+                                    <constraint firstAttribute="height" constant="40" id="C6U-gI-n9u"/>
                                     <constraint firstAttribute="width" constant="271" id="mgX-df-Ula"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="オプション">
                                     <color key="titleColor" red="0.85882352939999995" green="0.2901960784" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -99,11 +114,13 @@
                             <constraint firstItem="EOQ-T8-Obv" firstAttribute="top" secondItem="ycj-R3-Nnf" secondAttribute="bottom" id="6q9-XQ-KHK"/>
                             <constraint firstItem="Kbu-60-AFY" firstAttribute="leading" secondItem="5RW-wE-AEe" secondAttribute="leading" constant="44" id="DMS-Kt-Wnf"/>
                             <constraint firstItem="kM7-6Z-5Z1" firstAttribute="centerX" secondItem="5RW-wE-AEe" secondAttribute="centerX" id="EJU-Js-wJf"/>
+                            <constraint firstItem="q95-Bw-nrD" firstAttribute="centerX" secondItem="5RW-wE-AEe" secondAttribute="centerX" id="FRJ-7v-mlA"/>
                             <constraint firstItem="Kbu-60-AFY" firstAttribute="centerX" secondItem="5RW-wE-AEe" secondAttribute="centerX" id="HvI-mp-6eJ"/>
                             <constraint firstAttribute="trailing" secondItem="y1I-Vz-YMu" secondAttribute="trailing" constant="52" id="OXW-DG-B2f"/>
                             <constraint firstItem="y1I-Vz-YMu" firstAttribute="top" secondItem="5RW-wE-AEe" secondAttribute="top" id="PGC-8e-ne8"/>
                             <constraint firstItem="Uzy-hk-gPv" firstAttribute="centerX" secondItem="5RW-wE-AEe" secondAttribute="centerX" constant="9" id="Pfh-yT-iee"/>
                             <constraint firstItem="Qsj-HY-OO7" firstAttribute="top" secondItem="Uzy-hk-gPv" secondAttribute="bottom" constant="20" id="SU1-IL-AHs"/>
+                            <constraint firstItem="kM7-6Z-5Z1" firstAttribute="top" secondItem="q95-Bw-nrD" secondAttribute="bottom" constant="8" id="UD5-Mi-ift"/>
                             <constraint firstItem="Qsj-HY-OO7" firstAttribute="top" secondItem="kM7-6Z-5Z1" secondAttribute="bottom" constant="159" id="Vki-U0-YkJ"/>
                             <constraint firstItem="Qsj-HY-OO7" firstAttribute="top" secondItem="y1I-Vz-YMu" secondAttribute="bottom" id="WXO-hm-DlK"/>
                             <constraint firstItem="Kbu-60-AFY" firstAttribute="top" secondItem="fEv-v0-RtU" secondAttribute="bottom" constant="126" id="cJE-1G-jjx"/>
@@ -283,7 +300,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="2f2-vn-fn5" firstAttribute="top" secondItem="fsb-kL-Wrk" secondAttribute="bottom" constant="30" id="6yO-gh-Q5x"/>
