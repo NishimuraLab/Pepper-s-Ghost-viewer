@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -135,16 +134,37 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="スレッショルド(KNNのみ)" id="mXv-2Z-4Gp" userLabel="スレッショルド(KNNのみ)">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="66" id="gaz-th-mua">
+                                        <rect key="frame" x="0.0" y="201" width="375" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gaz-th-mua" id="xRe-fw-Pe8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jrl-p5-xev">
+                                                    <rect key="frame" x="30" y="18" width="314" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </slider>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="fsE-aU-Wuj" id="1Ng-Ft-YXh"/>
                             <outlet property="delegate" destination="fsE-aU-Wuj" id="sdz-Im-PmL"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="thresholdSlider" destination="jrl-p5-xev" id="gMI-GC-hA2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ujv-me-bwx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-418" y="282"/>
+            <point key="canvasLocation" x="-418.39999999999998" y="281.10944527736132"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -159,30 +179,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nid-p9-8Cz" userLabel="NorthView" customClass="AVPlayerView" customModule="GraduateProject" customModuleProvider="target">
-                                <rect key="frame" x="68" y="3.5" width="240" height="180"/>
+                                <rect key="frame" x="114" y="111.5" width="148" height="148"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="height" multiplier="4:3" id="1YM-dW-usy"/>
-                                    <constraint firstAttribute="width" constant="240" id="zJw-d5-oTe"/>
+                                    <constraint firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="height" multiplier="1:1" id="1YM-dW-usy"/>
+                                    <constraint firstAttribute="width" constant="148" id="zJw-d5-oTe"/>
                                 </constraints>
                             </view>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jke-p8-7hJ" userLabel="EastView" customClass="AVPlayerView" customModule="GraduateProject" customModuleProvider="target">
-                                <rect key="frame" x="188" y="243.5" width="240" height="180"/>
+                                <rect key="frame" x="228" y="259.5" width="148" height="148"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0S4-GH-j9U" userLabel="WestView" customClass="AVPlayerView" customModule="GraduateProject" customModuleProvider="target">
-                                <rect key="frame" x="-52.5" y="243.5" width="240" height="180"/>
+                                <rect key="frame" x="0.0" y="259.5" width="148" height="148"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQl-JW-W4c" userLabel="SouthView" customClass="AVPlayerView" customModule="GraduateProject" customModuleProvider="target">
-                                <rect key="frame" x="68" y="483.5" width="240" height="180"/>
+                                <rect key="frame" x="114" y="407.5" width="148" height="148"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MrB-uy-wJ5" userLabel="CenterPosition">
-                                <rect key="frame" x="163" y="309" width="50" height="50"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="148" y="294" width="80" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="aIJ-Gd-KAq"/>
+                                    <constraint firstAttribute="width" constant="80" id="aIJ-Gd-KAq"/>
                                     <constraint firstAttribute="width" secondItem="MrB-uy-wJ5" secondAttribute="height" multiplier="1:1" id="aX5-aP-Vj1"/>
                                 </constraints>
                             </view>
@@ -238,24 +257,24 @@
                         <constraints>
                             <constraint firstItem="KQl-JW-W4c" firstAttribute="height" secondItem="nid-p9-8Cz" secondAttribute="height" id="1Jt-Us-v7a"/>
                             <constraint firstItem="0S4-GH-j9U" firstAttribute="height" secondItem="nid-p9-8Cz" secondAttribute="height" id="1M9-nR-NqN"/>
-                            <constraint firstItem="0S4-GH-j9U" firstAttribute="centerX" secondItem="nid-p9-8Cz" secondAttribute="leading" id="6t3-Qm-NR6"/>
+                            <constraint firstItem="0S4-GH-j9U" firstAttribute="trailing" secondItem="MrB-uy-wJ5" secondAttribute="leading" id="2Vb-2F-WKL"/>
                             <constraint firstItem="KQl-JW-W4c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7Dl-zu-Nfk"/>
                             <constraint firstItem="0S4-GH-j9U" firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="width" id="96K-wP-BPi"/>
                             <constraint firstItem="0S4-GH-j9U" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Aup-aN-luA"/>
                             <constraint firstAttribute="trailing" secondItem="ocT-hB-7rM" secondAttribute="trailing" id="Eee-Ez-D4l"/>
-                            <constraint firstItem="Jke-p8-7hJ" firstAttribute="centerX" secondItem="nid-p9-8Cz" secondAttribute="trailing" id="LMR-UG-hAj"/>
                             <constraint firstItem="Jke-p8-7hJ" firstAttribute="height" secondItem="nid-p9-8Cz" secondAttribute="height" id="QU4-Jw-puv"/>
                             <constraint firstItem="MrB-uy-wJ5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sk7-fZ-FPr"/>
                             <constraint firstItem="ocT-hB-7rM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="VfM-XV-Vqw"/>
                             <constraint firstItem="MrB-uy-wJ5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aOT-rK-LGi"/>
+                            <constraint firstItem="nid-p9-8Cz" firstAttribute="bottom" secondItem="0S4-GH-j9U" secondAttribute="top" id="anN-w9-ZTi"/>
                             <constraint firstItem="Jke-p8-7hJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="arL-4x-fYY"/>
                             <constraint firstItem="nid-p9-8Cz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fAA-Dh-3oC"/>
+                            <constraint firstItem="Jke-p8-7hJ" firstAttribute="leading" secondItem="MrB-uy-wJ5" secondAttribute="trailing" id="gdN-b8-acy"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ocT-hB-7rM" secondAttribute="bottom" id="hFI-7q-oMz"/>
                             <constraint firstItem="ocT-hB-7rM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jZS-4x-YfC"/>
                             <constraint firstItem="KQl-JW-W4c" firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="width" id="jll-vv-6vS"/>
+                            <constraint firstItem="KQl-JW-W4c" firstAttribute="top" secondItem="0S4-GH-j9U" secondAttribute="bottom" id="l9Y-Mb-EOD"/>
                             <constraint firstItem="Jke-p8-7hJ" firstAttribute="width" secondItem="nid-p9-8Cz" secondAttribute="width" id="qLh-nB-EfS"/>
-                            <constraint firstItem="0S4-GH-j9U" firstAttribute="top" secondItem="nid-p9-8Cz" secondAttribute="bottom" constant="60" id="uMY-gd-Ujl"/>
-                            <constraint firstItem="KQl-JW-W4c" firstAttribute="top" secondItem="0S4-GH-j9U" secondAttribute="bottom" constant="60" id="zse-9t-bVa"/>
                         </constraints>
                     </view>
                     <connections>
