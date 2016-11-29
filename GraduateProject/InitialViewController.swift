@@ -10,12 +10,19 @@ import UIKit
 import AssetsLibrary
 
 class InitialViewController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @IBOutlet weak var algorithmLabel: UILabel!
+    @IBOutlet weak var thresholdLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
+        let type = UserDefaults.standard.integer(forKey: ALGORITHM)
+        let threshold = UserDefaults.standard.float(forKey: THRESHOLD)
+        let algorithm = type == 0 ? "KNN" : "MOG2"
+        algorithmLabel.text = "Algorithm : " + algorithm
+        thresholdLabel.text = "Threshold : " + String(threshold)
+        
     }
 
     @IBAction func onTapSelectMedia(_ sender: Any) {

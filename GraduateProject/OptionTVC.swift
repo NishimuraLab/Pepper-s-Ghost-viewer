@@ -17,13 +17,14 @@ class OptionTVC : UITableViewController {
         thresholdSlider.value = 0.5
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         //閾値調整
         let rangeMin = AppUtil.THRESHOLD_MIN
         let rangeMax = AppUtil.THRESHOLD_MAX
         let threshold = ((rangeMax - rangeMin) * thresholdSlider.value) + rangeMin
         UserDefaults.standard.set(threshold, forKey: THRESHOLD)
+        UserDefaults.standard.synchronize()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

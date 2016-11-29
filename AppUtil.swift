@@ -22,7 +22,7 @@ class AppUtil {
     static let fps = 20;
     static let size = CGSize(width: 640, height: 480)
     static let THRESHOLD_MIN : Float = 100.0
-    static let THRESHOLD_MAX : Float = 10000.0
+    static let THRESHOLD_MAX : Float = 5000.0
 
     
     //Util Functions

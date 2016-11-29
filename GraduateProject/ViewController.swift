@@ -39,7 +39,7 @@ class ViewController: UIViewController {
             try! fileManager.createDirectory(at: URL.init(fileURLWithPath: productsPath), withIntermediateDirectories: true, attributes: nil)
         }
         if assetURL == nil {
-            let URLString = Bundle.main.path(forResource: "N", ofType: "mov")
+            let URLString = Bundle.main.path(forResource: "out", ofType: "mov")
             assetURL = URL.init(fileURLWithPath: URLString!)
         }
         //動画ソース選択して、AVAssetに
