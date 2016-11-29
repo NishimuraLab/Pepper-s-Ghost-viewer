@@ -9,7 +9,7 @@
 #import "AVFoundationUtil.h"
 @interface ImageTransform : NSObject
 
-+ (void)setSubstructor:(int)type;
++ (void)setSubstructor:(int)algorithm threshold:(int)threshold;
 + (UIImage *)extractObjectImage:(UIImage *)targetImg;
 + (UIImage *)extractObjectImgWithBackImg:(UIImage *)targetImg : (UIImage *)backImg;
 + (void)unsetSubstructor;

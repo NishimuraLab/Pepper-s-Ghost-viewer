@@ -20,11 +20,11 @@
 //背景差分アルゴリズムの選択
 cv::Ptr< cv::BackgroundSubtractor> substractor;
 
-+ (void)setSubstructor:(int)type{
-    if(type == 0){
-        substractor = cv::createBackgroundSubtractorKNN();
++ (void)setSubstructor:(int)algorithm threshold:(int)threshold{
+    if(algorithm == 0){
+        substractor = cv::createBackgroundSubtractorKNN(500, threshold, true);
     }else{
-        substractor = cv::createBackgroundSubtractorMOG2();
+        substractor = cv::createBackgroundSubtractorMOG2(500, 16, true);
     }
 }
 

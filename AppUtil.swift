@@ -8,8 +8,10 @@
 
 import UIKit
 
-//UsersDefault
+//UsersDefault Key
 let ALGORITHM = "ALGORITHM"
+let THRESHOLD = "THRESHOLD"
+
 enum AlgorithmType : Int {
     case KNN
     case MOG2
@@ -19,6 +21,8 @@ class AppUtil {
     //Config
     static let fps = 20;
     static let size = CGSize(width: 640, height: 480)
+    static let THRESHOLD_MIN : Float = 100.0
+    static let THRESHOLD_MAX : Float = 10000.0
 
     
     //Util Functions

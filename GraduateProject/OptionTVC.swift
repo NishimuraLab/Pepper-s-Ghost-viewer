@@ -10,9 +10,20 @@ import Foundation
 
 class OptionTVC : UITableViewController {
     
+    @IBOutlet weak var thresholdSlider: UISlider!
+    
     var type = UserDefaults.standard.integer(forKey: ALGORITHM)
     override func viewWillAppear(_ animated: Bool) {
-        print(type)
+        thresholdSlider.value = 0.5
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        //閾値調整
+        let rangeMin = AppUtil.THRESHOLD_MIN
+        let rangeMax = AppUtil.THRESHOLD_MAX
+        let threshold = ((rangeMax - rangeMin) * thresholdSlider.value) + rangeMin
+        UserDefaults.standard.set(threshold, forKey: THRESHOLD)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

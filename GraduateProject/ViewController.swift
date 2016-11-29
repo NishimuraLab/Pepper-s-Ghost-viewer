@@ -47,7 +47,13 @@ class ViewController: UIViewController {
         
         
         //差分アルゴリズムを設定
-        ImageTransform.setSubstructor(Int32(UserDefaults.standard.integer(forKey: ALGORITHM)))
+        let algorithmType = Int32(UserDefaults.standard.integer(forKey: ALGORITHM))
+        var threshold = UserDefaults.standard.object(forKey: THRESHOLD)
+        if threshold == nil {
+            threshold = 400
+        }
+
+        ImageTransform.setSubstructor(algorithmType, threshold: threshold as! Int32)
         //動画を切り出して、フィルターをかける
         DispatchQueue.global(qos: .default).async {
             let images : [UIImage] = self.movie2FilteredImages(asset: self.originAsset)
