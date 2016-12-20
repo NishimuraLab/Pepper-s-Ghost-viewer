@@ -8,8 +8,9 @@
 
 import UIKit
 import AssetsLibrary
+import QBImagePickerController
 
-class InitialViewController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class InitialViewController : UIViewController, QBImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var algorithmLabel: UILabel!
     @IBOutlet weak var thresholdLabel: UILabel!
     override func viewDidLoad() {
@@ -22,7 +23,6 @@ class InitialViewController : UIViewController, UIImagePickerControllerDelegate,
         let algorithm = type == 0 ? "KNN" : "MOG2"
         algorithmLabel.text = "Algorithm : " + algorithm
         thresholdLabel.text = "Threshold : " + String(threshold)
-        
     }
 
     @IBAction func onTapSampleMovie(_ sender: Any) {
@@ -32,27 +32,38 @@ class InitialViewController : UIViewController, UIImagePickerControllerDelegate,
         if !AppUtil.isiPhone6Or6S() {
             presentMovieView()
         }
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let controller = UIImagePickerController()
-            controller.delegate = self
-            controller.sourceType = .photoLibrary
-            controller.mediaTypes = ["public.movie"]
-            controller.videoQuality = .type640x480
-            present(controller, animated: true, completion: nil)
-        }
+        
+        let controller = QBImagePickerController()
+        controller.delegate = self
+        controller.allowsMultipleSelection = true
+        controller.maximumNumberOfSelection = 4
+        controller.showsNumberOfSelectedAssets = true
+        controller.mediaType = .video
+        present(controller, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    
-        let url = info[UIImagePickerControllerReferenceURL] as? URL
+    func qb_imagePickerController(_ picker: QBImagePickerController!, didFinishPickingAssets assets: [Any]!) {
+        var resorces : [AVAsset] = []
+        let manager = PHImageManager.default()
+        assets.forEach { (_item) in
+            let item = _item as! PHAsset
+            let semaphore = DispatchSemaphore.init(value: 0)
+            manager.requestAVAsset(forVideo: item, options: nil, resultHandler: { (asset, audioMix, info) in
+                resorces.append(asset!)
+                semaphore.signal()
+            })
+            semaphore.wait()
+        }
+        
+        
         let vc : ViewController = AppUtil.viewControllerFromId(id: "ViewController") as! ViewController
-        vc.assetURL = url
+        vc.assets = resorces
         picker.dismiss(animated: false, completion: nil)
         self.present(vc, animated: true, completion: nil)
-        
+
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    func qb_imagePickerControllerDidCancel(_ imagePickerController: QBImagePickerController!) {
         dismiss(animated: true, completion: nil)
     }
     

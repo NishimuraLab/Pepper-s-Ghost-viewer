@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89E1E029B8BBAE0B6C34A68B /* Pods_GraduateProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06FB8DF8D92A4F32386C9BC /* Pods_GraduateProject.framework */; };
 		D3156D7C1DBA226C0076D109 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3156D7B1DBA226C0076D109 /* AppDelegate.swift */; };
 		D3156D7E1DBA226C0076D109 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3156D7D1DBA226C0076D109 /* ViewController.swift */; };
 		D3156D811DBA226C0076D109 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3156D7F1DBA226C0076D109 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 		D3739C9D1DC2644A007B1F82 /* nBack.png in Resources */ = {isa = PBXBuildFile; fileRef = D3739C9C1DC2644A007B1F82 /* nBack.png */; };
 		D3B6502A1DE82C9200591511 /* OptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B650291DE82C9200591511 /* OptionTVC.swift */; };
 		D3EF243F1DD5D3BD009400DE /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF243E1DD5D3BD009400DE /* AppUtil.swift */; };
+		F48561351DF9B86900C34D9E /* koi.mov in Resources */ = {isa = PBXBuildFile; fileRef = F48561341DF9B86900C34D9E /* koi.mov */; };
 		F493F2751DF6CFCD002BB1D2 /* out.mov in Resources */ = {isa = PBXBuildFile; fileRef = F493F2741DF6CFCD002BB1D2 /* out.mov */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,7 @@
 		D3739C9C1DC2644A007B1F82 /* nBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nBack.png; sourceTree = "<group>"; };
 		D3B650291DE82C9200591511 /* OptionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTVC.swift; sourceTree = "<group>"; };
 		D3EF243E1DD5D3BD009400DE /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = SOURCE_ROOT; };
+		F48561341DF9B86900C34D9E /* koi.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = koi.mov; path = ../../../Desktop/koi.mov; sourceTree = "<group>"; };
 		F493F2741DF6CFCD002BB1D2 /* out.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = out.mov; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D33D45A11DBB5A8600E2B669 /* opencv2.framework in Frameworks */,
+				89E1E029B8BBAE0B6C34A68B /* Pods_GraduateProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +159,7 @@
 		D34AABF61DBB41C300162974 /* movies */ = {
 			isa = PBXGroup;
 			children = (
+				F48561341DF9B86900C34D9E /* koi.mov */,
 				F493F2741DF6CFCD002BB1D2 /* out.mov */,
 				D34AABF71DBB41C300162974 /* E.mov */,
 				D34AABF81DBB41C300162974 /* N.mov */,
@@ -255,6 +260,7 @@
 				F493F2751DF6CFCD002BB1D2 /* out.mov in Resources */,
 				D3156D811DBA226C0076D109 /* Main.storyboard in Resources */,
 				D34AABFE1DBB41C300162974 /* W.mov in Resources */,
+				F48561351DF9B86900C34D9E /* koi.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +294,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D23E6BECA4E069E85B71C0A0 /* [CP] Copy Pods Resources */ = {

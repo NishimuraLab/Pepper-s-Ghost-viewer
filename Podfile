@@ -7,5 +7,5 @@ target 'GraduateProject' do
 
   # Pods for GraduateProject
   pod 'OpenCV'
-
+  pod 'QBImagePickerController'
 end

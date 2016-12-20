@@ -1,12 +1,15 @@
 PODS:
-  - OpenCV (3.0.0)
+  - OpenCV (3.1.0.1)
+  - QBImagePickerController (3.4.0)
 
 DEPENDENCIES:
   - OpenCV
+  - QBImagePickerController
 
 SPEC CHECKSUMS:
-  OpenCV: be07c02f0d8f125f1d40d261e66a66cb66ece3b3
+  OpenCV: 41c4250e2b06a394d6fbb634b5fa622cdd846018
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
 
-PODFILE CHECKSUM: e581551c8b3db4622931396a900742cc74307186
+PODFILE CHECKSUM: a0ac438df5b1ba66020e29a29532af5e277dbd6c
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1

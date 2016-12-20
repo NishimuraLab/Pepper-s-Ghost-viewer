@@ -16,18 +16,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var wView: AVPlayerView!
     @IBOutlet weak var sView: AVPlayerView!
     
-    var playerItem : AVPlayerItem!
-    var originAsset : AVURLAsset!
-    var filteredAsset : AVURLAsset!
-    var player : AVQueuePlayer!
-    var looper : AVPlayerLooper!
+    var playerItems : [AVPlayerItem] = []
+    var filteredAssets : [AVURLAsset] = []
+    var players : [AVQueuePlayer] = []
+    var loopers : [AVPlayerLooper] = []
     
-    open var assetURL : URL?
+    open var assets : [AVAsset]!
     
     let productsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/products/"
     let filterdMovieName = "gray.mov"
     
     let fileManager = FileManager.default
+    let readyFlags : [Int] = []
+    
+
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var initialView: UIView!
     @IBOutlet weak var progressBar: UIProgressView!
@@ -38,57 +40,58 @@ class ViewController: UIViewController {
         if !fileManager.fileExists(atPath: productsPath) {
             try! fileManager.createDirectory(at: URL.init(fileURLWithPath: productsPath), withIntermediateDirectories: true, attributes: nil)
         }
-        if assetURL == nil {
-            let URLString = Bundle.main.path(forResource: "out", ofType: "mov")
-            assetURL = URL.init(fileURLWithPath: URLString!)
+        if assets == nil {
+            let URLString = Bundle.main.path(forResource: "koi", ofType: "mov")
+            (0 ..< 3).forEach {_ in
+                let assetUrl = AVAsset(url: URL(fileURLWithPath: URLString!))
+                assets.append(assetUrl)
+            }
         }
-        //動画ソース選択して、AVAssetに
-        self.originAsset = AVURLAsset.init(url: assetURL!)
         
         
-        //差分アルゴリズムを設定
-        let algorithmType = Int32(UserDefaults.standard.integer(forKey: ALGORITHM))
-        var threshold = UserDefaults.standard.object(forKey: THRESHOLD)
-        if threshold == nil {
-            threshold = 400
-        }
-
-        ImageTransform.setSubstructor(algorithmType, threshold: threshold as! Int32)
         //動画を切り出して、フィルターをかける
         DispatchQueue.global(qos: .default).async {
-            let images : [UIImage] = self.movie2FilteredImages(asset: self.originAsset)
-            
-            //動画作成
-            DispatchQueue.main.async {
-                self.progressLabel.text = "静止画から動画を作成しています..."
-            }
-            
-            let path = self.productsPath + self.filterdMovieName
-            let url = URL(fileURLWithPath: path)
-            AppUtil.removeFilesWhenInit(path: path)
-            AVFoundationUtil.makeVideo(fromUIImages: self, url, images, Int32(AppUtil.fps))
-            DispatchQueue.main.async {
-                //フェードアウトしてPlayerを表示
-                self.fadeOutView(view: self.initialView)
-                self.initPlayer()
+            for (i, urlAsset) in self.assets.enumerated() {
+                let images : [UIImage] = self.movie2FilteredImages(asset: urlAsset)
+                
+                //動画作成
+                DispatchQueue.main.async {
+                    self.progressLabel.text = "静止画から動画を作成しています(\(i))..."
+                }
+                
+                let path = self.productsPath + "\(i)" + self.filterdMovieName
+                let url = URL(fileURLWithPath: path)
+                AppUtil.removeFilesWhenInit(path: path)
+                AVFoundationUtil.makeVideo(fromUIImages: self, url, images, Int32(AppUtil.fps))
+                
+                //プレイヤーもつくる
+                self.initPlayer(i: i)
+                
+                if i == (self.assets.count - 1) {
+                    DispatchQueue.main.async {
+                        //フェードアウトしてPlayerを表示
+                        self.fadeOutView(view: self.initialView)
+                    }
+                }
             }
         }
     }
 
-    func initPlayer() {
-        let movieFilePath = self.productsPath + self.filterdMovieName
+
+    func initPlayer(i : Int) {
+        let movieFilePath = self.productsPath + "\(i)" + self.filterdMovieName
         if !fileManager.fileExists(atPath: movieFilePath) {
             print("作成されたファイルが存在しません")
             exit(0)
         }
-        self.filteredAsset = AVURLAsset(url: URL(fileURLWithPath: movieFilePath))
+        filteredAssets.append(AVURLAsset(url: URL(fileURLWithPath: movieFilePath)))
         //プレイヤーに加工済みのアセットをSet
-        self.playerItem = AVPlayerItem.init(asset: self.filteredAsset)
+        playerItems.append(AVPlayerItem(asset: filteredAssets[i]))
         //KVO登録
-        self.playerItem.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
-        self.player = AVQueuePlayer(playerItem: self.playerItem)
+        playerItems[i].addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
+        players.append(AVQueuePlayer(playerItem: playerItems[i]))
         //ルーパーを作成して、動画をループする(iOS10からの機能)
-        self.looper = AVPlayerLooper(player: self.player, templateItem: self.playerItem)
+        loopers.append(AVPlayerLooper(player: players[i], templateItem: playerItems[i]))
     }
 
     func fadeOutView(view : UIView){
@@ -100,7 +103,7 @@ class ViewController: UIViewController {
     }
     
     //動画をFPSごとに画像に変換し、フィルターをかけるメソッド
-    func movie2FilteredImages(asset : AVURLAsset) -> [UIImage]{
+    func movie2FilteredImages(asset : AVAsset) -> [UIImage]{
         //ローカルから動画を読み出し
         let generator = AVAssetImageGenerator(asset: asset)
         generator.requestedTimeToleranceAfter = kCMTimeZero
@@ -109,6 +112,15 @@ class ViewController: UIViewController {
         let fps = AppUtil.fps
         let end = Int(CMTimeGetSeconds(asset.duration)) * fps
         var images : [UIImage] = []
+        
+        //差分アルゴリズムを設定
+        let algorithmType = Int32(UserDefaults.standard.integer(forKey: ALGORITHM))
+        var threshold = UserDefaults.standard.object(forKey: THRESHOLD)
+        if threshold == nil {
+            threshold = 400
+        }
+        
+        ImageTransform.setSubstructor(algorithmType, threshold: threshold as! Int32)
         
         //切り出した画像の数回ループし、フィルターをかけてファイルを作成
         (0 ..< end).forEach { (i) in
@@ -142,40 +154,41 @@ class ViewController: UIViewController {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "status" {
-            let status : AVPlayerItemStatus = playerItem.status
-            
-            switch status {
-            case .readyToPlay:
-                print("動画を再生します。")
-                //TODO: 冗長性をなくす
-                nView.player = player
-                eView.player = player
-                wView.player = player
-                sView.player = player
-                
-                nView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-                eView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-                wView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-                sView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-                
-                nView.player.play()
-                eView.player.play()
-                wView.player.play()
-                sView.player.play()
-                
-//                nView.isHidden = true
-//                eView.isHidden = true
-//                wView.isHidden = true
-                
-            case .failed:
-                print("再生に失敗しました")
-            case .unknown:
-                print("unknown")
-            }
-        }else{
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        if !self.readyToPlay() {
+            return
         }
+        
+        print("動画を再生します。")
+        //TODO: 冗長性をなくす
+        nView.player = players[0]
+        eView.player = players[1]
+        wView.player = players[2]
+        sView.player = players[3]
+        
+        nView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
+        eView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
+        wView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
+        sView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
+        
+        nView.player.play()
+        eView.player.play()
+        wView.player.play()
+        sView.player.play()
+        
+    }
+    
+    private func readyToPlay() -> Bool {
+        var ready : Bool = true
+        if playerItems.count != 4 {
+            return false
+        }
+        playerItems.forEach { (item) in
+            if item.status != .readyToPlay {
+                ready = false
+            }
+        }
+        
+        return ready
     }
 
 

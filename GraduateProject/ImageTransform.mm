@@ -22,7 +22,7 @@ cv::Ptr< cv::BackgroundSubtractor> substractor;
 
 + (void)setSubstructor:(int)algorithm threshold:(int)threshold{
     if(algorithm == 0){
-        substractor = cv::createBackgroundSubtractorKNN(500, threshold, true);
+        substractor = cv::createBackgroundSubtractorKNN(100, threshold, true);
     }else{
         substractor = cv::createBackgroundSubtractorMOG2(500, 16, true);
     }
@@ -51,7 +51,7 @@ cv::Ptr< cv::BackgroundSubtractor> substractor;
 }
 
 + (void)unsetSubstructor{
-    delete substractor;
+    substractor->clear();
 }
 @end
 
