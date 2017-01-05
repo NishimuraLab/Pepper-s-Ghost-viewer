@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     var players : [AVQueuePlayer] = []
     var loopers : [AVPlayerLooper] = []
     
-    open var assets : [AVAsset]!
+    var assets : [AVAsset]!
     
     let productsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/products/"
     let filterdMovieName = "gray.mov"
@@ -41,8 +41,9 @@ class ViewController: UIViewController {
             try! fileManager.createDirectory(at: URL.init(fileURLWithPath: productsPath), withIntermediateDirectories: true, attributes: nil)
         }
         if assets == nil {
-            let URLString = Bundle.main.path(forResource: "koi", ofType: "mov")
-            (0 ..< 3).forEach {_ in
+            assets = []
+            let URLString = Bundle.main.path(forResource: "out", ofType: "mov")
+            (0 ..< 4).forEach {_ in
                 let assetUrl = AVAsset(url: URL(fileURLWithPath: URLString!))
                 assets.append(assetUrl)
             }
@@ -52,23 +53,28 @@ class ViewController: UIViewController {
         //動画を切り出して、フィルターをかける
         DispatchQueue.global(qos: .default).async {
             for (i, urlAsset) in self.assets.enumerated() {
+                DispatchQueue.main.async {
+                    self.progressLabel.text = "動画を切り出しています(\(i + 1))..."
+                }
                 let images : [UIImage] = self.movie2FilteredImages(asset: urlAsset)
                 
                 //動画作成
                 DispatchQueue.main.async {
-                    self.progressLabel.text = "静止画から動画を作成しています(\(i))..."
+                    self.progressLabel.text = "静止画から動画を作成しています(\(i + 1))..."
                 }
                 
-                let path = self.productsPath + "\(i)" + self.filterdMovieName
+                let path = self.productsPath + "\(i + 1)" + self.filterdMovieName
                 let url = URL(fileURLWithPath: path)
                 AppUtil.removeFilesWhenInit(path: path)
-                AVFoundationUtil.makeVideo(fromUIImages: self, url, images, Int32(AppUtil.fps))
+                let util = AVFoundationUtil()
+                util.makeVideo(fromUIImages: self, url, images, Int32(AppUtil.fps))
                 
                 //プレイヤーもつくる
                 self.initPlayer(i: i)
                 
                 if i == (self.assets.count - 1) {
                     DispatchQueue.main.async {
+                        self.assets.removeAll(keepingCapacity: false)
                         //フェードアウトしてPlayerを表示
                         self.fadeOutView(view: self.initialView)
                     }
