@@ -6,6 +6,6 @@ target 'GraduateProject' do
   use_frameworks!
 
   # Pods for GraduateProject
-  pod 'OpenCV'
+  pod 'OpenCV', '3.0'
   pod 'QBImagePickerController'
 end
