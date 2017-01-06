@@ -19,8 +19,8 @@ enum AlgorithmType : Int {
 
 class AppUtil {
     //Config
-    static let fps = 20;
-    static let size = CGSize(width: 640, height: 480)
+    static let fps = 15;
+    static let size = CGSize(width: 400, height: 300)
     static let THRESHOLD_MIN : Float = 0.0
     static let THRESHOLD_MAX : Float = 1000.0
 
