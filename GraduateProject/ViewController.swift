@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     
     let fileManager = FileManager.default
     let readyFlags : [Int] = []
+    var isSample : Bool = false
     
 
     @IBOutlet weak var progressLabel: UILabel!
@@ -40,12 +41,12 @@ class ViewController: UIViewController {
             try! fileManager.createDirectory(at: URL.init(fileURLWithPath: productsPath), withIntermediateDirectories: true, attributes: nil)
         }
         if assets == nil {
-            assets = []
-            let URLString = Bundle.main.path(forResource: "out", ofType: "mov")
-            (0 ..< 4).forEach {_ in
-                let assetUrl = AVAsset(url: URL(fileURLWithPath: URLString!))
-                assets.append(assetUrl)
+            isSample = true
+            (0 ..< 4).forEach {i in
+                self.initPlayer(i: i)
             }
+            self.fadeOutView(view: self.initialView)
+            return
         }
         
         
@@ -83,10 +84,14 @@ class ViewController: UIViewController {
 
 
     func initPlayer(i : Int) {
-        let movieFilePath = self.productsPath + "\(i)" + ".mov"
-        if !fileManager.fileExists(atPath: movieFilePath) {
+        var movieFilePath = self.productsPath + "\(i)" + ".mov"
+        if !fileManager.fileExists(atPath: movieFilePath) && !isSample{
             print("作成されたファイルが存在しません")
             exit(0)
+        }
+        
+        if isSample{
+            movieFilePath = Bundle.main.path(forResource: "sample", ofType: "mov")!
         }
         filteredAssets.append(AVURLAsset(url: URL(fileURLWithPath: movieFilePath)))
         //プレイヤーに加工済みのアセットをSet
