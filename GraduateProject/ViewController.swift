@@ -24,7 +24,6 @@ class ViewController: UIViewController {
     var assets : [AVAsset]!
     
     let productsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/products/"
-    let filterdMovieName = "gray.mov"
     
     let fileManager = FileManager.default
     let readyFlags : [Int] = []
@@ -63,7 +62,7 @@ class ViewController: UIViewController {
                     self.progressLabel.text = "静止画から動画を作成しています(\(i + 1))..."
                 }
                 
-                let path = self.productsPath + "\(i + 1)" + self.filterdMovieName
+                let path = self.productsPath + "\(i)" + ".mov"
                 let url = URL(fileURLWithPath: path)
                 AppUtil.removeFilesWhenInit(path: path)
                 let util = AVFoundationUtil()
@@ -74,7 +73,6 @@ class ViewController: UIViewController {
                 
                 if i == (self.assets.count - 1) {
                     DispatchQueue.main.async {
-                        self.assets.removeAll(keepingCapacity: false)
                         //フェードアウトしてPlayerを表示
                         self.fadeOutView(view: self.initialView)
                     }
@@ -85,7 +83,7 @@ class ViewController: UIViewController {
 
 
     func initPlayer(i : Int) {
-        let movieFilePath = self.productsPath + "\(i)" + self.filterdMovieName
+        let movieFilePath = self.productsPath + "\(i)" + ".mov"
         if !fileManager.fileExists(atPath: movieFilePath) {
             print("作成されたファイルが存在しません")
             exit(0)
@@ -94,7 +92,7 @@ class ViewController: UIViewController {
         //プレイヤーに加工済みのアセットをSet
         playerItems.append(AVPlayerItem(asset: filteredAssets[i]))
         //KVO登録
-        playerItems[i].addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
+        playerItems[i].addObserver(self, forKeyPath: "status", options: [.new], context: nil)
         players.append(AVQueuePlayer(playerItem: playerItems[i]))
         //ルーパーを作成して、動画をループする(iOS10からの機能)
         loopers.append(AVPlayerLooper(player: players[i], templateItem: playerItems[i]))
@@ -193,10 +191,7 @@ class ViewController: UIViewController {
                 ready = false
             }
         }
-        
         return ready
     }
-
-
 }
 
