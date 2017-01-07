@@ -179,29 +179,19 @@ class ViewController: UIViewController {
         if !self.readyToPlay() {
             return
         }
-        
+
         print("動画を再生します。")
-        //TODO: 冗長性をなくす
-        nView.player = players[0]
-        eView.player = players[1]
-        wView.player = players[2]
-        sView.player = players[3]
-        
-        nView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-        eView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-        wView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-        sView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-        
-        nView.player.play()
-        eView.player.play()
-        wView.player.play()
-        sView.player.play()
-        
+        let views : [AVPlayerView] = [nView, eView, wView, sView]
+        for (i, player) in players.enumerated() {
+            views[i].player = player
+            views[i].setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
+            views[i].player.play()   
+        }
     }
     
     private func readyToPlay() -> Bool {
         var ready : Bool = true
-        if playerItems.count != 4 {
+        if playerItems.count != assets.count {
             return false
         }
         playerItems.forEach { (item) in
