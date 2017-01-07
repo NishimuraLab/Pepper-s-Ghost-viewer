@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     var loopers : [AVPlayerLooper] = []
     
     var assets : [AVAsset]!
+    var diffImages : [UIImage]?
     
     let productsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/products/"
     
@@ -34,6 +35,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var initialView: UIView!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var percentLabel: UILabel!
+    
+    func setDiffImages(images: [UIImage]) {
+        diffImages = images
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,14 +54,13 @@ class ViewController: UIViewController {
             return
         }
         
-        
         //動画を切り出して、フィルターをかける
         DispatchQueue.global(qos: .default).async {
             for (i, urlAsset) in self.assets.enumerated() {
                 DispatchQueue.main.async {
                     self.progressLabel.text = "動画を切り出しています(\(i + 1))..."
                 }
-                let images : [UIImage] = self.movie2FilteredImages(asset: urlAsset)
+                let images : [UIImage] = self.movie2FilteredImages(asset: urlAsset, index: i)
                 
                 //動画作成
                 DispatchQueue.main.async {
@@ -112,7 +116,7 @@ class ViewController: UIViewController {
     }
     
     //動画をFPSごとに画像に変換し、フィルターをかけるメソッド
-    func movie2FilteredImages(asset : AVAsset) -> [UIImage]{
+    func movie2FilteredImages(asset : AVAsset, index : Int) -> [UIImage]{
         //ローカルから動画を読み出し
         let generator = AVAssetImageGenerator(asset: asset)
         generator.requestedTimeToleranceAfter = kCMTimeZero
@@ -128,8 +132,9 @@ class ViewController: UIViewController {
         if threshold == nil {
             threshold = 400
         }
-        
-        ImageTransform.setSubstructor(algorithmType, threshold: threshold as! Int32)
+        if diffImages == nil {
+            ImageTransform.setSubstructor(algorithmType, threshold: threshold as! Int32)
+        }
         
         //切り出した画像の数回ループし、フィルターをかけてファイルを作成
         (0 ..< end).forEach { (i) in
@@ -137,8 +142,14 @@ class ViewController: UIViewController {
             do{
                 let image : CGImage = try generator.copyCGImage(at: time, actualTime: &time)
                 let genImage : UIImage = UIImage(cgImage: image)
+                var filteredImg : UIImage?
                 //OpenCVにてフィルター処理
-                let filteredImg = ImageTransform.extractObjectImage(genImage)
+                if let _diffImages = diffImages {
+                    filteredImg = ImageTransform.extractObjectImg(withBackImg: genImage, _diffImages[index])
+                }else{
+                    filteredImg = ImageTransform.extractObjectImage(genImage)
+                }
+                
                 images.append(filteredImg!)
             }catch{
                 print("Errors has detected!")
@@ -151,8 +162,10 @@ class ViewController: UIViewController {
                 self.percentLabel.text = String(percent) + "%"
             }
         }
-        //メモリ解放
-        ImageTransform.unsetSubstructor()
+        if diffImages == nil {
+            //メモリ解放
+            ImageTransform.unsetSubstructor()
+        }
         
         return images
     }

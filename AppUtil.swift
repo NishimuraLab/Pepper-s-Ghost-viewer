@@ -15,6 +15,7 @@ let THRESHOLD = "THRESHOLD"
 enum AlgorithmType : Int {
     case KNN
     case MOG2
+    case DIFF
 }
 
 class AppUtil {

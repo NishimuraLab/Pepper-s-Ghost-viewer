@@ -32,8 +32,9 @@ class OptionTVC : UITableViewController {
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let type : AlgorithmType = indexPath.row == AlgorithmType.KNN.rawValue ? .KNN : .MOG2
-        UserDefaults.standard.set(type.rawValue, forKey: ALGORITHM)
+        if indexPath.section == 1 { return }
+        
+        UserDefaults.standard.set(indexPath.row, forKey: ALGORITHM)
         let cell = tableView.cellForRow(at: indexPath)
         cell?.accessoryType = .checkmark
         self.dismiss(animated: true, completion: nil)
