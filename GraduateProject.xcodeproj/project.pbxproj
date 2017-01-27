@@ -24,6 +24,15 @@
 		D3EF243F1DD5D3BD009400DE /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF243E1DD5D3BD009400DE /* AppUtil.swift */; };
 		F493F2751DF6CFCD002BB1D2 /* out.mov in Resources */ = {isa = PBXBuildFile; fileRef = F493F2741DF6CFCD002BB1D2 /* out.mov */; };
 		F4BEA6201E1FA7190005A64C /* sample.mov in Resources */ = {isa = PBXBuildFile; fileRef = F4BEA61F1E1FA7190005A64C /* sample.mov */; };
+		F4C00FB21E27F2C60087567A /* 1.m4v in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FAE1E27F1AC0087567A /* 1.m4v */; };
+		F4C00FB31E27F2C60087567A /* 2.m4v in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FAF1E27F1AC0087567A /* 2.m4v */; };
+		F4C00FB41E27F2C60087567A /* 4.m4v in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB01E27F1AC0087567A /* 4.m4v */; };
+		F4C00FB51E27F2C60087567A /* 3.m4v in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB11E27F1AC0087567A /* 3.m4v */; };
+		F4C00FBA1E27F3A70087567A /* 1B.tif in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB61E27F3A70087567A /* 1B.tif */; };
+		F4C00FBB1E27F3A70087567A /* 2B.tif in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB71E27F3A70087567A /* 2B.tif */; };
+		F4C00FBC1E27F3A70087567A /* 3B.tif in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB81E27F3A70087567A /* 3B.tif */; };
+		F4C00FBD1E27F3A70087567A /* 4B.tif in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB91E27F3A70087567A /* 4B.tif */; };
+		F4CB8C421E28E909006F3286 /* diff.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CB8C411E28E909006F3286 /* diff.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +59,15 @@
 		D3EF243E1DD5D3BD009400DE /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = SOURCE_ROOT; };
 		F493F2741DF6CFCD002BB1D2 /* out.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = out.mov; sourceTree = "<group>"; };
 		F4BEA61F1E1FA7190005A64C /* sample.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sample.mov; sourceTree = "<group>"; };
+		F4C00FAE1E27F1AC0087567A /* 1.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.m4v; sourceTree = "<group>"; };
+		F4C00FAF1E27F1AC0087567A /* 2.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.m4v; sourceTree = "<group>"; };
+		F4C00FB01E27F1AC0087567A /* 4.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4.m4v; sourceTree = "<group>"; };
+		F4C00FB11E27F1AC0087567A /* 3.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.m4v; sourceTree = "<group>"; };
+		F4C00FB61E27F3A70087567A /* 1B.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 1B.tif; sourceTree = "<group>"; };
+		F4C00FB71E27F3A70087567A /* 2B.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 2B.tif; sourceTree = "<group>"; };
+		F4C00FB81E27F3A70087567A /* 3B.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 3B.tif; sourceTree = "<group>"; };
+		F4C00FB91E27F3A70087567A /* 4B.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 4B.tif; sourceTree = "<group>"; };
+		F4CB8C411E28E909006F3286 /* diff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diff.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +169,10 @@
 		D34AABF61DBB41C300162974 /* movies */ = {
 			isa = PBXGroup;
 			children = (
+				F4C00FAE1E27F1AC0087567A /* 1.m4v */,
+				F4C00FAF1E27F1AC0087567A /* 2.m4v */,
+				F4C00FB01E27F1AC0087567A /* 4.m4v */,
+				F4C00FB11E27F1AC0087567A /* 3.m4v */,
 				F4BEA61F1E1FA7190005A64C /* sample.mov */,
 				F493F2741DF6CFCD002BB1D2 /* out.mov */,
 			);
@@ -168,6 +190,11 @@
 		D3739C9B1DC2644A007B1F82 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				F4CB8C411E28E909006F3286 /* diff.png */,
+				F4C00FB61E27F3A70087567A /* 1B.tif */,
+				F4C00FB71E27F3A70087567A /* 2B.tif */,
+				F4C00FB81E27F3A70087567A /* 3B.tif */,
+				F4C00FB91E27F3A70087567A /* 4B.tif */,
 				D368E46F1DED6E0600B7EEE3 /* apple-back.jpg */,
 				D3739C9C1DC2644A007B1F82 /* nBack.png */,
 			);
@@ -238,8 +265,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4C00FBD1E27F3A70087567A /* 4B.tif in Resources */,
+				F4C00FBB1E27F3A70087567A /* 2B.tif in Resources */,
+				F4C00FB21E27F2C60087567A /* 1.m4v in Resources */,
+				F4C00FBC1E27F3A70087567A /* 3B.tif in Resources */,
+				F4CB8C421E28E909006F3286 /* diff.png in Resources */,
+				F4C00FB31E27F2C60087567A /* 2.m4v in Resources */,
+				F4C00FB41E27F2C60087567A /* 4.m4v in Resources */,
+				F4C00FB51E27F2C60087567A /* 3.m4v in Resources */,
 				D3156D861DBA226C0076D109 /* LaunchScreen.storyboard in Resources */,
 				D3739C9D1DC2644A007B1F82 /* nBack.png in Resources */,
+				F4C00FBA1E27F3A70087567A /* 1B.tif in Resources */,
 				D368E4701DED6E0600B7EEE3 /* apple-back.jpg in Resources */,
 				D3156D831DBA226C0076D109 /* Assets.xcassets in Resources */,
 				F493F2751DF6CFCD002BB1D2 /* out.mov in Resources */,
