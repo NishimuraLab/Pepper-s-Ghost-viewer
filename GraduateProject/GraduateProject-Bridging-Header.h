@@ -9,6 +9,9 @@
 #import "AVFoundationUtil.h"
 @interface ImageTransform : NSObject
 
-+ (UIImage *)MaskedImage:(UIImage *)objectImg;
++ (void)setSubstructor:(int)algorithm threshold:(int)threshold;
++ (UIImage *)extractObjectImage:(UIImage *)targetImg;
++ (UIImage *)extractObjectImgWithBackImg:(UIImage *)targetImg : (UIImage *)backImg;
++ (void)unsetSubstructor;
 
 @end

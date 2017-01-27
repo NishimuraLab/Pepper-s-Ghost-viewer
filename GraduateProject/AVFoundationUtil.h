@@ -10,25 +10,14 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreVideo/CoreVideo.h>
 
+
 /**
  AVFoundation.framework用ユーティリティクラス
  */
 @interface AVFoundationUtil : NSObject
 
-/**
- サンプルバッファのデータから`UIImage`インスタンスを生成する
- 
- @param     sampleBuffer       サンプルバッファ
- @return    生成した`UIImage`インスタンス
- */
-+ (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
++ (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image;
 
-/**
- デバイスの向きからカメラAPIの向きを判別する
- 
- @param     deviceOrientation   デバイスの向き
- @return    カメラの向き
- */
-+ (AVCaptureVideoOrientation)videoOrientationFromDeviceOrientation:(UIDeviceOrientation)deviceOrientation;
+- (void)makeVideoFromUIImages:(UIViewController*)caller : (NSURL*)url : (NSArray<UIImage*>*)images : (int32_t)_fps;
 
 @end

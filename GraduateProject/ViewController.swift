@@ -16,36 +16,107 @@ class ViewController: UIViewController {
     @IBOutlet weak var wView: AVPlayerView!
     @IBOutlet weak var sView: AVPlayerView!
     
-    var playerItem : AVPlayerItem!
-    var asset : AVURLAsset!
-    var player : AVQueuePlayer!
-    var looper : AVPlayerLooper!
+    var playerItems : [AVPlayerItem] = []
+    var filteredAssets : [AVURLAsset] = []
+    var players : [AVQueuePlayer] = []
+    var loopers : [AVPlayerLooper] = []
     
+    var assets : [AVAsset]!
+    var diffImages : [UIImage]?
+    
+    let productsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/products/"
+    
+    let fileManager = FileManager.default
+    let readyFlags : [Int] = []
+    var isSample : Bool = false
+    
+
+    @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var initialView: UIView!
     @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var percentLabel: UILabel!
+    
+    func setDiffImages(images: [UIImage]) {
+        diffImages = images
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !fileManager.fileExists(atPath: productsPath) {
+            try! fileManager.createDirectory(at: URL.init(fileURLWithPath: productsPath), withIntermediateDirectories: true, attributes: nil)
+        }
+        if assets == nil {
+            isSample = true
+//            assets = []
+//            diffImages = []
+            (0 ..< 4).forEach {i in
+                self.initPlayer(i: i)
+//                let sampleMoviePath = Bundle.main.path(forResource: String(i + 1), ofType: "m4v")
+//                assets.append(AVAsset(url: URL(fileURLWithPath: sampleMoviePath!)))
+//                diffImages?.append(UIImage(named: String(i + 1) + "B.tif")!)
+            }
+            self.fadeOutView(view: self.initialView)
+            return
+        }
         
-
-        //動画ソース選択して、AVAssetに
-        let URLString = Bundle.main.path(forResource: "N", ofType: "mov")
-        let url = URL.init(fileURLWithPath: URLString!)
-        asset = AVURLAsset.init(url: url)
+//        if imageMode {
+//            let image = UIImage(named: "diff.png")
+//            eView.layer.contents = image?.cgImage
+//            self.fadeOutView(view: self.initialView)
+//            return
+//        }
+        
         //動画を切り出して、フィルターをかける
         DispatchQueue.global(qos: .default).async {
-            self.movie2FilteredImages(asset: self.asset)
-            DispatchQueue.main.async {
-                self.fadeOutView(view: self.initialView)
+            for (i, urlAsset) in self.assets.enumerated() {
+                DispatchQueue.main.async {
+                    self.progressLabel.text = "動画を切り出しています(\(i + 1))..."
+                }
+                let images : [UIImage] = self.movie2FilteredImages(asset: urlAsset, index: i)
+                
+                //動画作成
+                DispatchQueue.main.async {
+                    self.progressLabel.text = "静止画から動画を作成しています(\(i + 1))..."
+                }
+                
+                let path = self.productsPath + "\(i)" + ".mov"
+                let url = URL(fileURLWithPath: path)
+                AppUtil.removeFilesWhenInit(path: path)
+                let util = AVFoundationUtil()
+                util.makeVideo(fromUIImages: self, url, images, Int32(AppUtil.fps))
+                
+                //プレイヤーもつくる
+                self.initPlayer(i: i)
+                
+                if i == (self.assets.count - 1) {
+                    DispatchQueue.main.async {
+                        //フェードアウトしてPlayerを表示
+                        self.fadeOutView(view: self.initialView)
+                    }
+                }
             }
         }
+    }
 
-        playerItem = AVPlayerItem.init(asset: asset)
+
+    func initPlayer(i : Int) {
+        var movieFilePath = self.productsPath + "\(i)" + ".mov"
+        if !fileManager.fileExists(atPath: movieFilePath) && !isSample{
+            print("作成されたファイルが存在しません")
+            exit(0)
+        }
+        
+        if isSample{
+            movieFilePath = Bundle.main.path(forResource: "sample", ofType: "mov")!
+        }
+        filteredAssets.append(AVURLAsset(url: URL(fileURLWithPath: movieFilePath)))
+        //プレイヤーに加工済みのアセットをSet
+        playerItems.append(AVPlayerItem(asset: filteredAssets[i]))
         //KVO登録
-        playerItem.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
-        player = AVQueuePlayer(playerItem: playerItem)
+        playerItems[i].addObserver(self, forKeyPath: "status", options: [.new], context: nil)
+        players.append(AVQueuePlayer(playerItem: playerItems[i]))
         //ルーパーを作成して、動画をループする(iOS10からの機能)
-        looper = AVPlayerLooper(player: player, templateItem: playerItem)
+        loopers.append(AVPlayerLooper(player: players[i], templateItem: playerItems[i]))
     }
 
     func fadeOutView(view : UIView){
@@ -55,26 +126,43 @@ class ViewController: UIViewController {
         view.alpha = 0
         UIView.commitAnimations()
     }
-    func movie2FilteredImages(asset : AVURLAsset){
+    
+    //動画をFPSごとに画像に変換し、フィルターをかけるメソッド
+    func movie2FilteredImages(asset : AVAsset, index : Int) -> [UIImage]{
         //ローカルから動画を読み出し
         let generator = AVAssetImageGenerator(asset: asset)
         generator.requestedTimeToleranceAfter = kCMTimeZero
         generator.requestedTimeToleranceBefore = kCMTimeZero
-        let fps = 20
+        generator.maximumSize = AppUtil.size
+        let fps = AppUtil.fps
         let end = Int(CMTimeGetSeconds(asset.duration)) * fps
+        var images : [UIImage] = []
         
-        //切り出した画像の数岳ループし、フィルターをかけてファイルを作成
+        //差分アルゴリズムを設定
+        let algorithmType = Int32(UserDefaults.standard.integer(forKey: ALGORITHM))
+        var threshold = UserDefaults.standard.object(forKey: THRESHOLD)
+        if threshold == nil {
+            threshold = 400
+        }
+        if diffImages == nil {
+            ImageTransform.setSubstructor(algorithmType, threshold: threshold as! Int32)
+        }
+        
+        //切り出した画像の数回ループし、フィルターをかけてファイルを作成
         (0 ..< end).forEach { (i) in
             var time = CMTimeMake(Int64(i), Int32(fps))
             do{
                 let image : CGImage = try generator.copyCGImage(at: time, actualTime: &time)
                 let genImage : UIImage = UIImage(cgImage: image)
-                let filteredImg = ImageTransform.maskedImage(genImage)
-                let data = UIImageJPEGRepresentation(filteredImg!, 0.6)
-                let fileName = String.init(format: "/Users/reastral/Desktop/GraduateProject/images/%i.jpg", i)
-                let jpgUrl = URL(fileURLWithPath: fileName)
-                try data?.write(to: jpgUrl)
-                print("書き込み完了")
+                var filteredImg : UIImage?
+                //OpenCVにてフィルター処理
+                if let _diffImages = diffImages {
+                    filteredImg = ImageTransform.extractObjectImg(withBackImg: genImage, _diffImages[index])
+                }else{
+                    filteredImg = ImageTransform.extractObjectImage(genImage)
+                }
+                
+                images.append(filteredImg!)
             }catch{
                 print("Errors has detected!")
             }
@@ -82,9 +170,16 @@ class ViewController: UIViewController {
                 //Progress更新
                 let progress  = Float(i) / Float(end)
                 self.progressBar.progress = progress
+                let percent = Int(ceil(progress * 100))
+                self.percentLabel.text = String(percent) + "%"
             }
         }
+        if diffImages == nil {
+            //メモリ解放
+            ImageTransform.unsetSubstructor()
+        }
         
+        return images
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,37 +188,34 @@ class ViewController: UIViewController {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "status" {
-            let status : AVPlayerItemStatus = playerItem.status
-            
-            switch status {
-            case .readyToPlay:
-                print("動画を再生します。")
-                //TODO: 冗長性をなくす
-                nView.player = player
-                eView.player = player
-                wView.player = player
-                sView.player = player
-                
-                nView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-                eView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-                wView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-                sView.setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
-                
-                nView.player.play()
-                eView.player.play()
-                wView.player.play()
-                sView.player.play()
-            case .failed:
-                print("再生に失敗しました")
-            case .unknown:
-                print("unknown")
-            }
-        }else{
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        if !self.readyToPlay() {
+            return
+        }
+
+        print("動画を再生します。")
+        let views : [AVPlayerView] = [nView, wView , sView, eView]
+        for (i, player) in players.enumerated() {
+            views[i].player = player
+            views[i].setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
+            views[i].player.play()   
         }
     }
-
-
+    
+    private func readyToPlay() -> Bool {
+        var ready : Bool = true
+        if isSample {
+            return true
+        }
+        
+        if playerItems.count != assets.count {
+            return false
+        }
+        playerItems.forEach { (item) in
+            if item.status != .readyToPlay {
+                ready = false
+            }
+        }
+        return ready
+    }
 }
 

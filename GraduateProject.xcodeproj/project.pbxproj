@@ -7,19 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89E1E029B8BBAE0B6C34A68B /* Pods_GraduateProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06FB8DF8D92A4F32386C9BC /* Pods_GraduateProject.framework */; };
 		D3156D7C1DBA226C0076D109 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3156D7B1DBA226C0076D109 /* AppDelegate.swift */; };
 		D3156D7E1DBA226C0076D109 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3156D7D1DBA226C0076D109 /* ViewController.swift */; };
 		D3156D811DBA226C0076D109 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3156D7F1DBA226C0076D109 /* Main.storyboard */; };
 		D3156D831DBA226C0076D109 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3156D821DBA226C0076D109 /* Assets.xcassets */; };
 		D3156D861DBA226C0076D109 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3156D841DBA226C0076D109 /* LaunchScreen.storyboard */; };
+		D31B05851DC8987A003222A3 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B05841DC8987A003222A3 /* InitialViewController.swift */; };
 		D33D45A11DBB5A8600E2B669 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33D45A01DBB5A8600E2B669 /* opencv2.framework */; };
 		D33D45A51DBB5B5400E2B669 /* ImageTransform.mm in Sources */ = {isa = PBXBuildFile; fileRef = D33D45A41DBB5B5400E2B669 /* ImageTransform.mm */; };
 		D33D45A71DBB5CC800E2B669 /* AVFoundationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D33D45A61DBB5CC800E2B669 /* AVFoundationUtil.m */; };
 		D34AABF41DBB3EA800162974 /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AABF31DBB3EA800162974 /* AVPlayerView.swift */; };
-		D34AABFB1DBB41C300162974 /* E.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABF71DBB41C300162974 /* E.mov */; };
-		D34AABFC1DBB41C300162974 /* N.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABF81DBB41C300162974 /* N.mov */; };
-		D34AABFD1DBB41C300162974 /* S.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABF91DBB41C300162974 /* S.mov */; };
-		D34AABFE1DBB41C300162974 /* W.mov in Resources */ = {isa = PBXBuildFile; fileRef = D34AABFA1DBB41C300162974 /* W.mov */; };
+		D368E4701DED6E0600B7EEE3 /* apple-back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D368E46F1DED6E0600B7EEE3 /* apple-back.jpg */; };
+		D3739C9D1DC2644A007B1F82 /* nBack.png in Resources */ = {isa = PBXBuildFile; fileRef = D3739C9C1DC2644A007B1F82 /* nBack.png */; };
+		D3B6502A1DE82C9200591511 /* OptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B650291DE82C9200591511 /* OptionTVC.swift */; };
+		D3EF243F1DD5D3BD009400DE /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF243E1DD5D3BD009400DE /* AppUtil.swift */; };
+		F493F2751DF6CFCD002BB1D2 /* out.mov in Resources */ = {isa = PBXBuildFile; fileRef = F493F2741DF6CFCD002BB1D2 /* out.mov */; };
+		F4BEA6201E1FA7190005A64C /* sample.mov in Resources */ = {isa = PBXBuildFile; fileRef = F4BEA61F1E1FA7190005A64C /* sample.mov */; };
+		F4C00FB21E27F2C60087567A /* 1.m4v in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FAE1E27F1AC0087567A /* 1.m4v */; };
+		F4C00FB31E27F2C60087567A /* 2.m4v in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FAF1E27F1AC0087567A /* 2.m4v */; };
+		F4C00FB41E27F2C60087567A /* 4.m4v in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB01E27F1AC0087567A /* 4.m4v */; };
+		F4C00FB51E27F2C60087567A /* 3.m4v in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB11E27F1AC0087567A /* 3.m4v */; };
+		F4C00FBA1E27F3A70087567A /* 1B.tif in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB61E27F3A70087567A /* 1B.tif */; };
+		F4C00FBB1E27F3A70087567A /* 2B.tif in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB71E27F3A70087567A /* 2B.tif */; };
+		F4C00FBC1E27F3A70087567A /* 3B.tif in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB81E27F3A70087567A /* 3B.tif */; };
+		F4C00FBD1E27F3A70087567A /* 4B.tif in Resources */ = {isa = PBXBuildFile; fileRef = F4C00FB91E27F3A70087567A /* 4B.tif */; };
+		F4CB8C421E28E909006F3286 /* diff.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CB8C411E28E909006F3286 /* diff.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,16 +46,28 @@
 		D3156D821DBA226C0076D109 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3156D851DBA226C0076D109 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3156D871DBA226C0076D109 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D31B05841DC8987A003222A3 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D33D45A01DBB5A8600E2B669 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Pods/OpenCV/opencv2.framework; sourceTree = "<group>"; };
 		D33D45A31DBB5B5400E2B669 /* GraduateProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GraduateProject-Bridging-Header.h"; sourceTree = "<group>"; };
 		D33D45A41DBB5B5400E2B669 /* ImageTransform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageTransform.mm; sourceTree = "<group>"; };
 		D33D45A61DBB5CC800E2B669 /* AVFoundationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVFoundationUtil.m; sourceTree = "<group>"; };
 		D33D45A81DBB5CDA00E2B669 /* AVFoundationUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVFoundationUtil.h; sourceTree = "<group>"; };
 		D34AABF31DBB3EA800162974 /* AVPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
-		D34AABF71DBB41C300162974 /* E.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = E.mov; sourceTree = "<group>"; };
-		D34AABF81DBB41C300162974 /* N.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = N.mov; sourceTree = "<group>"; };
-		D34AABF91DBB41C300162974 /* S.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = S.mov; sourceTree = "<group>"; };
-		D34AABFA1DBB41C300162974 /* W.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = W.mov; sourceTree = "<group>"; };
+		D368E46F1DED6E0600B7EEE3 /* apple-back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "apple-back.jpg"; sourceTree = "<group>"; };
+		D3739C9C1DC2644A007B1F82 /* nBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nBack.png; sourceTree = "<group>"; };
+		D3B650291DE82C9200591511 /* OptionTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTVC.swift; sourceTree = "<group>"; };
+		D3EF243E1DD5D3BD009400DE /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = SOURCE_ROOT; };
+		F493F2741DF6CFCD002BB1D2 /* out.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = out.mov; sourceTree = "<group>"; };
+		F4BEA61F1E1FA7190005A64C /* sample.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sample.mov; sourceTree = "<group>"; };
+		F4C00FAE1E27F1AC0087567A /* 1.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.m4v; sourceTree = "<group>"; };
+		F4C00FAF1E27F1AC0087567A /* 2.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.m4v; sourceTree = "<group>"; };
+		F4C00FB01E27F1AC0087567A /* 4.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4.m4v; sourceTree = "<group>"; };
+		F4C00FB11E27F1AC0087567A /* 3.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.m4v; sourceTree = "<group>"; };
+		F4C00FB61E27F3A70087567A /* 1B.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 1B.tif; sourceTree = "<group>"; };
+		F4C00FB71E27F3A70087567A /* 2B.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 2B.tif; sourceTree = "<group>"; };
+		F4C00FB81E27F3A70087567A /* 3B.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 3B.tif; sourceTree = "<group>"; };
+		F4C00FB91E27F3A70087567A /* 4B.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 4B.tif; sourceTree = "<group>"; };
+		F4CB8C411E28E909006F3286 /* diff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diff.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +76,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D33D45A11DBB5A8600E2B669 /* opencv2.framework in Frameworks */,
+				89E1E029B8BBAE0B6C34A68B /* Pods_GraduateProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +106,7 @@
 			children = (
 				D3156D7A1DBA226C0076D109 /* GraduateProject */,
 				D3156D791DBA226C0076D109 /* Products */,
+				D3739C9B1DC2644A007B1F82 /* images */,
 				D34AABF61DBB41C300162974 /* movies */,
 				A4CFE241F4546398D64D8E1D /* Pods */,
 				B50DC38F06B0143C4B6A7BB6 /* Frameworks */,
@@ -101,6 +128,7 @@
 				D34AABF21DBB3E7000162974 /* Controllers */,
 				D34AABF11DBB3E6800162974 /* Views */,
 				D3156D7B1DBA226C0076D109 /* AppDelegate.swift */,
+				D3EF243E1DD5D3BD009400DE /* AppUtil.swift */,
 				D3156D7F1DBA226C0076D109 /* Main.storyboard */,
 				D3156D821DBA226C0076D109 /* Assets.xcassets */,
 				D3156D841DBA226C0076D109 /* LaunchScreen.storyboard */,
@@ -131,7 +159,9 @@
 		D34AABF21DBB3E7000162974 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D31B05841DC8987A003222A3 /* InitialViewController.swift */,
 				D3156D7D1DBA226C0076D109 /* ViewController.swift */,
+				D3B650291DE82C9200591511 /* OptionTVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -139,10 +169,12 @@
 		D34AABF61DBB41C300162974 /* movies */ = {
 			isa = PBXGroup;
 			children = (
-				D34AABF71DBB41C300162974 /* E.mov */,
-				D34AABF81DBB41C300162974 /* N.mov */,
-				D34AABF91DBB41C300162974 /* S.mov */,
-				D34AABFA1DBB41C300162974 /* W.mov */,
+				F4C00FAE1E27F1AC0087567A /* 1.m4v */,
+				F4C00FAF1E27F1AC0087567A /* 2.m4v */,
+				F4C00FB01E27F1AC0087567A /* 4.m4v */,
+				F4C00FB11E27F1AC0087567A /* 3.m4v */,
+				F4BEA61F1E1FA7190005A64C /* sample.mov */,
+				F493F2741DF6CFCD002BB1D2 /* out.mov */,
 			);
 			path = movies;
 			sourceTree = "<group>";
@@ -153,6 +185,20 @@
 				D33D45A21DBB5B2D00E2B669 /* OpenVC */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		D3739C9B1DC2644A007B1F82 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				F4CB8C411E28E909006F3286 /* diff.png */,
+				F4C00FB61E27F3A70087567A /* 1B.tif */,
+				F4C00FB71E27F3A70087567A /* 2B.tif */,
+				F4C00FB81E27F3A70087567A /* 3B.tif */,
+				F4C00FB91E27F3A70087567A /* 4B.tif */,
+				D368E46F1DED6E0600B7EEE3 /* apple-back.jpg */,
+				D3739C9C1DC2644A007B1F82 /* nBack.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,7 +236,7 @@
 				TargetAttributes = {
 					D3156D771DBA226B0076D109 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 9GZDTSW432;
+						DevelopmentTeam = 4BR954ZS5U;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
@@ -219,13 +265,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D34AABFD1DBB41C300162974 /* S.mov in Resources */,
+				F4C00FBD1E27F3A70087567A /* 4B.tif in Resources */,
+				F4C00FBB1E27F3A70087567A /* 2B.tif in Resources */,
+				F4C00FB21E27F2C60087567A /* 1.m4v in Resources */,
+				F4C00FBC1E27F3A70087567A /* 3B.tif in Resources */,
+				F4CB8C421E28E909006F3286 /* diff.png in Resources */,
+				F4C00FB31E27F2C60087567A /* 2.m4v in Resources */,
+				F4C00FB41E27F2C60087567A /* 4.m4v in Resources */,
+				F4C00FB51E27F2C60087567A /* 3.m4v in Resources */,
 				D3156D861DBA226C0076D109 /* LaunchScreen.storyboard in Resources */,
-				D34AABFC1DBB41C300162974 /* N.mov in Resources */,
+				D3739C9D1DC2644A007B1F82 /* nBack.png in Resources */,
+				F4C00FBA1E27F3A70087567A /* 1B.tif in Resources */,
+				D368E4701DED6E0600B7EEE3 /* apple-back.jpg in Resources */,
 				D3156D831DBA226C0076D109 /* Assets.xcassets in Resources */,
-				D34AABFB1DBB41C300162974 /* E.mov in Resources */,
+				F493F2751DF6CFCD002BB1D2 /* out.mov in Resources */,
 				D3156D811DBA226C0076D109 /* Main.storyboard in Resources */,
-				D34AABFE1DBB41C300162974 /* W.mov in Resources */,
+				F4BEA6201E1FA7190005A64C /* sample.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +314,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D23E6BECA4E069E85B71C0A0 /* [CP] Copy Pods Resources */ = {
@@ -284,7 +339,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3B6502A1DE82C9200591511 /* OptionTVC.swift in Sources */,
 				D34AABF41DBB3EA800162974 /* AVPlayerView.swift in Sources */,
+				D31B05851DC8987A003222A3 /* InitialViewController.swift in Sources */,
+				D3EF243F1DD5D3BD009400DE /* AppUtil.swift in Sources */,
 				D3156D7E1DBA226C0076D109 /* ViewController.swift in Sources */,
 				D33D45A51DBB5B5400E2B669 /* ImageTransform.mm in Sources */,
 				D33D45A71DBB5CC800E2B669 /* AVFoundationUtil.m in Sources */,
@@ -411,16 +469,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 9GZDTSW432;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4BR954ZS5U;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/OpenCV",
 				);
 				INFOPLIST_FILE = GraduateProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = grad.red.shalm.GraduateProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GraduateProject/GraduateProject-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -433,16 +494,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 9GZDTSW432;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4BR954ZS5U;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/OpenCV",
 				);
 				INFOPLIST_FILE = GraduateProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = grad.red.shalm.GraduateProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "GraduateProject/GraduateProject-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
