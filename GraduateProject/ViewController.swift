@@ -47,12 +47,24 @@ class ViewController: UIViewController {
         }
         if assets == nil {
             isSample = true
+//            assets = []
+//            diffImages = []
             (0 ..< 4).forEach {i in
                 self.initPlayer(i: i)
+//                let sampleMoviePath = Bundle.main.path(forResource: String(i + 1), ofType: "m4v")
+//                assets.append(AVAsset(url: URL(fileURLWithPath: sampleMoviePath!)))
+//                diffImages?.append(UIImage(named: String(i + 1) + "B.tif")!)
             }
             self.fadeOutView(view: self.initialView)
             return
         }
+        
+//        if imageMode {
+//            let image = UIImage(named: "diff.png")
+//            eView.layer.contents = image?.cgImage
+//            self.fadeOutView(view: self.initialView)
+//            return
+//        }
         
         //動画を切り出して、フィルターをかける
         DispatchQueue.global(qos: .default).async {
@@ -181,7 +193,7 @@ class ViewController: UIViewController {
         }
 
         print("動画を再生します。")
-        let views : [AVPlayerView] = [nView, eView, wView, sView]
+        let views : [AVPlayerView] = [nView, wView , sView, eView]
         for (i, player) in players.enumerated() {
             views[i].player = player
             views[i].setVideoFillMode(mode: AVLayerVideoGravityResizeAspectFill as NSString)
@@ -191,6 +203,10 @@ class ViewController: UIViewController {
     
     private func readyToPlay() -> Bool {
         var ready : Bool = true
+        if isSample {
+            return true
+        }
+        
         if playerItems.count != assets.count {
             return false
         }
